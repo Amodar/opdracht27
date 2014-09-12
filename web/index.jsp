@@ -26,8 +26,6 @@
     {
         conmsg = "Geen database verbinding";
     }
-    
-    
 %>
 
 <!DOCTYPE html>
@@ -55,7 +53,7 @@
                 {
                     out.print("Geen resultaat");
                 }
-                if(aantal > 0)
+                else
                 {
             %>
             <table border="1">
@@ -72,11 +70,11 @@
                     <th>Geboortedatum</th>
                     <th>Team</th>
                 </tr>
-            <% 
+                <% 
                 for(int i = 0; i < aantal; i++)
                 {
                     lid = ov.getLid(i);
-            %>
+                %>
                 <tr>
                     <td><%= lid.getSpelerscode() %></td>
                     <td><%= lid.getSpelersnr() %></td>
@@ -89,18 +87,17 @@
                     <td><%= lid.getTelefoon() %></td>
                     <td><%= lid.getGeboortedatum() %></td>
                     <td>teamnaam</td>
-                    <td><b>Wijzig</b></td>
-                    <td><b>Verwijder</b></td>
+                    <th>Wijzig</th>
+                    <th>Verwijder</th>
                 </tr>
-            <%
+                <%
                 }
                 %>
             </table>
-        <%
+            <%
+                }
             }
-        }
-        %>
-
+            %>
         </form>
     
         <form action="index.jsp" method="get">
@@ -139,15 +136,13 @@
                         <td><%= lid.getTelefoon() %></td>
                         <td><%= lid.getGeboortedatum() %></td>
                         <td>teamnaam</td>
-                        <td><b>Wijzig</b></td>
-                        <td><b>Verwijder</b></td>
+                        <th>Wijzig</th>
+                        <th>Verwijder</th>
                     </tr>
-
                 <%
                     }
                 %>
             </table>
-
         </form>
     </body>
 </html>
