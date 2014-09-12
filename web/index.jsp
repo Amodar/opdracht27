@@ -48,9 +48,9 @@
             {
                 ov.getStudentsSearched(request.getParameter("input"));
                 aantal = ov.getAantalLeden();
-            %>
-            <h2>Resultaat</h2>
-            <%
+                
+                out.print("<h2>Resultaat</h2>");
+                
                 if(aantal == 0)
                 {
                     out.print("Geen resultaat");
@@ -60,41 +60,40 @@
             %>
             <table border="1">
                 <tr>
-                    <th><b>Spelerscode</b></th>
-                    <th><b>Spelersnummer</b></th>
-                    <th><b>Roepnaam</b></th>
-                    <th><b>Tussenvoegsels</b></th>
-                    <th><b>Achternaam</b></th>
-                    <th><b>Adres</b></th>
-                    <th><b>Postcode</b></th>
-                    <th><b>Woonplaats</b></th>
-                    <th><b>Telefoon</b></th>
-                    <th><b>Geboortedatum</b></th>
-                    <th><b>Team<b></th>
+                    <th>Spelerscode</th>
+                    <th>Spelersnummer</th>
+                    <th>Roepnaam</th>
+                    <th>Tussenvoegsels</th>
+                    <th>Achternaam</th>
+                    <th>Adres</th>
+                    <th>Postcode</th>
+                    <th>Woonplaats</th>
+                    <th>Telefoon</th>
+                    <th>Geboortedatum</th>
+                    <th>Team</th>
                 </tr>
-                <% 
-                    for(int i = 0; i < aantal; i++)
-                    {
-                        lid = ov.getLid(i);
-
-                %>
-                    <tr>
-                        <td><%= lid.getSpelerscode() %></td>
-                        <td><%= lid.getSpelersnr() %></td>
-                        <td><%= lid.getRoepnaam() %></td>
-                        <td><%= lid.getTussenvoegsels() %></td>
-                        <td><%= lid.getAchternaam() %></td>
-                        <td><%= lid.getAdres() %></td>
-                        <td><%= lid.getPostcode() %></td>
-                        <td><%= lid.getWoonplaats() %></td>
-                        <td><%= lid.getTelefoon() %></td>
-                        <td><%= lid.getGeboortedatum() %></td>
-                        <td>teamnaam</td>
-                        <td><b>Wijzig</b></td>
-                        <td><b>Verwijder</b></td>
-                    </tr>
-                <%
-                    }
+            <% 
+                for(int i = 0; i < aantal; i++)
+                {
+                    lid = ov.getLid(i);
+            %>
+                <tr>
+                    <td><%= lid.getSpelerscode() %></td>
+                    <td><%= lid.getSpelersnr() %></td>
+                    <td><%= lid.getRoepnaam() %></td>
+                    <td><%= lid.getTussenvoegsels() %></td>
+                    <td><%= lid.getAchternaam() %></td>
+                    <td><%= lid.getAdres() %></td>
+                    <td><%= lid.getPostcode() %></td>
+                    <td><%= lid.getWoonplaats() %></td>
+                    <td><%= lid.getTelefoon() %></td>
+                    <td><%= lid.getGeboortedatum() %></td>
+                    <td>teamnaam</td>
+                    <td><b>Wijzig</b></td>
+                    <td><b>Verwijder</b></td>
+                </tr>
+            <%
+                }
                 %>
             </table>
         <%
