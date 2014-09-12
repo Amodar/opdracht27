@@ -7,8 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Lid lid;
-    lid = new Lid("1");
-    %>
+    
+    lid = new Lid(request.getParameter("id"));
+%>
 <!DOCTYPE html>
 <html>
     <head>

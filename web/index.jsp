@@ -87,8 +87,8 @@
                     <td><%= lid.getTelefoon() %></td>
                     <td><%= lid.getGeboortedatum() %></td>
                     <td>teamnaam</td>
-                    <th>Wijzig</th>
-                    <th>Verwijder</th>
+                    <th><a href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>">Wijzigen</a></th>
+                    <th><a href = "verwijder.jsp?id=<%= lid.getSpelerscode() %>">Verwijder</a></th>
                 </tr>
                 <%
                 }
@@ -136,8 +136,8 @@
                         <td><%= lid.getTelefoon() %></td>
                         <td><%= lid.getGeboortedatum() %></td>
                         <td>teamnaam</td>
-                        <th>Wijzig</th>
-                        <th>Verwijder</th>
+                        <th><a href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>">Wijzigen</a></th>
+                        <th><a href = "verwijder.jsp?id=<%= lid.getSpelerscode() %>">Verwijder</a></th>
                     </tr>
                 <%
                     }
