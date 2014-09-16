@@ -132,4 +132,46 @@ public class Lid {
             return this.getRoepnaam() + " "  + this.getTussenvoegsels() + " " +  this.getAchternaam();
         }
     }
+    
+    
+
+    public void setSpelerscode(String spelerscode) {
+        this.spelerscode = spelerscode;
+    }
+
+    public void setSpelersnr(String spelersnr) {
+        this.spelersnr = spelersnr;
+    }
+
+    public void setRoepnaam(String roepnaam) {
+        this.roepnaam = roepnaam;
+    }
+
+    public void setTussenvoegsels(String tussenvoegsels) {
+        this.tussenvoegsels = tussenvoegsels;
+    }
+
+    public void setAchternaam(String achternaam) {
+        this.achternaam = achternaam;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public void setWoonplaats(String woonplaats) {
+        this.woonplaats = woonplaats;
+    }
+
+    public void setTelefoon(String telefoon) {
+        this.telefoon = telefoon;
+    }
+
+    public void setGeboortedatum(Date geboortedatum) {
+        this.geboortedatum = geboortedatum;
+    }
 }

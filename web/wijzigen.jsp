@@ -7,8 +7,26 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Lid lid;
-    
-    lid = new Lid(request.getParameter("id"));
+    int fout = 0;
+
+    if(request.getParameter("terug") != null) {
+         response.sendRedirect(response.encodeURL("index.jsp"));
+         return;
+    }
+    if(request.getParameter("submit") == null) {
+        lid = new Lid(request.getParameter("id"));
+    }
+    else {
+        lid = new Lid(request.getParameter("spelerscode"));
+        lid.
+        
+        if(student.wijzigen() == 0) {
+            response.sendRedirect(response.encodeURL("index.jsp"));
+        }
+        else {
+            fout = 1;
+        }
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +37,7 @@
         
     </head>
     <body>
-        <h1>$spelernaam wijzigen</h1>
+        <h1>User wijzigen</h1>
         <form action = "studentwijzigen.jsp" method="post">
                 <input type = "hidden" id = "spelerscode" name = "spelerscode" value="<%= lid.getSpelerscode() %>" /> 
                 <fieldset>
