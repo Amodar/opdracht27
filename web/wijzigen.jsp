@@ -18,9 +18,9 @@
     }
     else {
         lid = new Lid(request.getParameter("spelerscode"));
-        lid.
+        lid.getAchternaam(request.getParameter("roepnaam"));
         
-        if(student.wijzigen() == 0) {
+        if(lid.wijzigen() == 0) {
             response.sendRedirect(response.encodeURL("index.jsp"));
         }
         else {
@@ -37,6 +37,9 @@
         
     </head>
     <body>
+         <input type = "text" id = "roepnaam" name = "roepnaam" 
+                                        value="<%= lid.getAchternaam() %>" />
+        
         <h1>User wijzigen</h1>
         <form action = "studentwijzigen.jsp" method="post">
                 <input type = "hidden" id = "spelerscode" name = "spelerscode" value="<%= lid.getSpelerscode() %>" /> 

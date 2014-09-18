@@ -8,6 +8,7 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import tconnection.TConnection;
@@ -79,6 +80,59 @@ public class Lid {
         this.dbc = con.getConnection(); 
         return 0;
     }
+    
+    //-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    public int wijzigen() {
+        String updateQuery = "UPDATE speler SET spelersnr = ?, " +
+                "roepnaam = ?, tussenvoegsels = ?, achternaam = ?, " +
+                "adres = ?, postcode = ?, woonplaats = ?, telefoon = ?, " +
+                "geboortedatum = ?, WHERE spelerscode = ?";
+        int ret = 0;
+        
+        if(connecting() == -1) {
+           return -1;
+        }
+        
+        dbc.makeQuery(updateQuery);
+        dbc.insertIntoQuery(1, this.spelersnr, this.roepnaam, this.tussenvoegsels, 
+                this.achternaam, this.adres, this.postcode, this.woonplaats, 
+                this.telefoon);
+        dbc.insertIntoQuery(9,this.geboortedatum);
+        if(dbc.sendQuery() == -1) {
+            ret = -1;
+        }
+        dbc.closeDbConnection();
+        return ret;
+    }
+    
+    public int toevoegen() {        
+        String insertQuery = "INSERT INTO speler (spelersnr, roepnaam, tussenvoegsels, " +
+                "achternaam, adres, postcode, woonplaats, telefoon, geboortedatum) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        int ret = 0;
+        
+        if(connecting() == -1) {
+           return -1;
+        }
+        dbc.makeQuery(insertQuery);
+        dbc.insertIntoQuery(1, this.spelersnr, this.roepnaam, this.tussenvoegsels, 
+                this.achternaam, this.adres, this.postcode, this.woonplaats, 
+                this.telefoon);
+        dbc.insertIntoQuery(9,this.geboortedatum);
+        
+        if(dbc.sendQuery() == -1) {
+            ret = -1;
+        }
+        dbc.closeDbConnection();
+        return ret;
+    }
+    //-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
     
     public String getSpelerscode() {
         return spelerscode == null? "":spelerscode;
