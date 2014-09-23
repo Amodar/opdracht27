@@ -102,6 +102,7 @@
     
         <form action="index.jsp" method="get">
             <h2>Overzicht</h2>
+            <input type="button" value="Speler toevoegen" name="toevoegen">
             <table border="1">
                 <tr>
                     <th><b>Spelerscode</b></th>
