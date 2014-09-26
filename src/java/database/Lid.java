@@ -8,7 +8,6 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import tconnection.TConnection;
@@ -23,6 +22,9 @@ public class Lid {
     String spelerscode, spelersnr, roepnaam, tussenvoegsels, achternaam;
     String adres, postcode, woonplaats, telefoon;
     Date geboortedatum;
+    
+    public Lid() {
+    }
     
     public Lid(String spelerscode) {
         String selectQuery = "SELECT spelerscode, spelersnr, roepnaam, tussenvoegsels, achternaam, adres, postcode, woonplaats, telefoon, geboortedatum "

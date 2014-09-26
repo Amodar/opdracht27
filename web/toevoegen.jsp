@@ -5,25 +5,31 @@
 <%@ page import = "database.Lid"%>
 <%
 Lid lid;
+
 int fout = 0;
 Date date;
+
 
 if(request.getParameter("terug") != null) {
      response.sendRedirect(response.encodeURL("index.jsp"));
      return;
 }
 if(request.getParameter("submit") != null) {
-    lid = new Lid("");
+    SimpleDateFormat sdf;
+    sdf = new SimpleDateFormat("dd-MM-yyyy");
+    date = sdf.parse(request.getParameter("geboortedatum"));
+    
+    lid = new Lid();
     lid.setSpelerscode(request.getParameter("spelerscode"));
     lid.setSpelersnr(request.getParameter("spelersnr"));
     lid.setRoepnaam(request.getParameter("roepnaam"));
-    lid.setTussenvoegsels(request.getParameter("tussenvoegsels"));
     lid.setAchternaam(request.getParameter("achternaam"));
+    lid.setTussenvoegsels(request.getParameter("tussenvoegsels"));
     lid.setAdres(request.getParameter("adres"));
     lid.setPostcode(request.getParameter("postcode"));
     lid.setWoonplaats(request.getParameter("woonplaats"));
-    lid.setTelefoon(request.getParameter("telefoon"));    
-    lid.setGeboortedatum(request.getParameter(datum));
+    lid.setTelefoon(request.getParameter("telefoon"));
+    lid.setGeboortedatum(date);
     
     if(lid.toevoegen() == 0) {
         response.sendRedirect(response.encodeURL("index.jsp"));
@@ -47,51 +53,40 @@ if(request.getParameter("submit") != null) {
     <body>
       <div id = "wrapper">
         <h2>Gegevens lid toevoegen</h2>
-       <% if(fout == 1) {
+       <%   if(fout == 1) {
                 out.print("<p class = \"error\"> Er is een fout opgetreden bij het toevoegen van gegevens van een lid..!</p>");
                 out.println("       </div>");
                 out.println("   </body>");
                 out.println("</html>");
                 return;
-               }
-            %>
-        <form action = "lidtoevoegen.jsp" method="post">
+            }
+        %>
+        <form action = "toevoegen.jsp" method="post">
             <fieldset>
                 <legend>Gegevens lid</legend>
                 <label for = "spelerscode">Spelerscode</label>
-                <input type = "text" id = "spelerscode" name = "spelerscode"  />
+                <input type = "text" id = "spelerscode" name = "spelerscode"  /><br>
                 <label for = "spelersnr">Spelersnr</label>
-                <input type = "text" id = "spelersnr" name = "spelersnr"  />
+                <input type = "text" id = "spelersnr" name = "spelersnr"  /><br>
                 <label for = "roepnaam">Roepnaam</label>
-                <input type = "text" id = "roepnaam" name = "roepnaam" />
+                <input type = "text" id = "roepnaam" name = "roepnaam" /><br>
                 <label for = "achternaam">Achternaam</label>
-                <input type = "text" id = "achternaam" name = "achternaam" />
+                <input type = "text" id = "achternaam" name = "achternaam" /><br>
+                <label for = "adres">Tussenvoegsels</label>
+                <input type = "text" id = "tussenvoegsels" name = "tussenvoegsels" /><br>
                 <label for = "adres">Adres</label>
-                <input type = "text" id = "adres" name = "adres" />
+                <input type = "text" id = "adres" name = "adres" /><br>
                 <label for = "postcode">Postcode</label>
-                <input type = "text" id = "postcode" name = "postcode" />
+                <input type = "text" id = "postcode" name = "postcode" /><br>
                 <label for = "woonplaats">Woonplaats</label>
-                <input type = "text" id = "woonplaats" name = "woonplaats" />
+                <input type = "text" id = "woonplaats" name = "woonplaats" /><br>
                 <label for = "telefoon">Telefoon</label>
-                <input type = "text" id = "telefoon" name = "telefoon" />
+                <input type = "text" id = "telefoon" name = "telefoon" /><br>
                 <label for = "geboortedatum">Geboortedatum</label>
-                <input type = "text" id = "geboortedatum" name = "geboortedatum" />
-                <%
-                    if(request.getParameter("geboortedatum") != null) {
-                        try{
-                        SimpleDateFormat sdf;
-                        sdf = new SimpleDateFormat("dd-MM-yyyy");
-                        date = sdf.format(request.getParameter("geboortedatum"));
-                        }
-                        catch{
-                            
-                        }
-                    }
-                %>
-                <div id = "knoppenbalk">
-                    <input type = "submit" class = "knop" name = "submit" value="Verzenden" />
-                    <input type = "submit" class = "knop" name = "terug" value = "Terug" />
-                </div>
+                <input type = "date" id = "geboortedatum" name = "geboortedatum" /><br>
+                
+                <input type = "submit" class = "knop" name = "submit" value="Verzenden" />
+                <input type = "submit" class = "knop" name = "terug" value = "Terug" />
             </fieldset>
         </form>
       </div>

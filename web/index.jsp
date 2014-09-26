@@ -26,6 +26,11 @@
     {
         conmsg = "Geen database verbinding";
     }
+    
+    if(request.getParameter("toevoegen") != null) {
+        response.sendRedirect(response.encodeURL("toevoegen.jsp"));
+        return;
+    }
 %>
 
 <!DOCTYPE html>
@@ -102,7 +107,7 @@
     
         <form action="index.jsp" method="get">
             <h2>Overzicht</h2>
-            <input type="button" value="Speler toevoegen" name="toevoegen">
+            <input type="submit" value="Speler toevoegen" name="toevoegen">
             <table border="1">
                 <tr>
                     <th><b>Spelerscode</b></th>
