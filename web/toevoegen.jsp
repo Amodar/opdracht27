@@ -31,6 +31,8 @@ if(request.getParameter("submit") != null) {
     lid.setTelefoon(request.getParameter("telefoon"));
     lid.setGeboortedatum(date);
     
+    lid.toevoegen();
+    
     if(lid.toevoegen() == 0) {
         response.sendRedirect(response.encodeURL("index.jsp"));
     }
@@ -72,7 +74,7 @@ if(request.getParameter("submit") != null) {
                 <input type = "text" id = "roepnaam" name = "roepnaam" /><br>
                 <label for = "achternaam">Achternaam</label>
                 <input type = "text" id = "achternaam" name = "achternaam" /><br>
-                <label for = "adres">Tussenvoegsels</label>
+                <label for = "tussenvoegsels">Tussenvoegsels</label>
                 <input type = "text" id = "tussenvoegsels" name = "tussenvoegsels" /><br>
                 <label for = "adres">Adres</label>
                 <input type = "text" id = "adres" name = "adres" /><br>
@@ -85,8 +87,8 @@ if(request.getParameter("submit") != null) {
                 <label for = "geboortedatum">Geboortedatum</label>
                 <input type = "date" id = "geboortedatum" name = "geboortedatum" /><br>
                 
-                <input type = "submit" class = "knop" name = "submit" value="Verzenden" />
-                <input type = "submit" class = "knop" name = "terug" value = "Terug" />
+                <input type = "submit" name = "submit" value="Verzenden" />
+                <input type = "submit" name = "terug" value = "Terug" />
             </fieldset>
         </form>
       </div>

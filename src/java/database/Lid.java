@@ -111,19 +111,21 @@ public class Lid {
     }
     
     public int toevoegen() {        
-        String insertQuery = "INSERT INTO speler (spelersnr, roepnaam, tussenvoegsels, " +
+        String insertQuery = "INSERT INTO speler (spelerscode, spelersnr, roepnaam, tussenvoegsels, " +
                 "achternaam, adres, postcode, woonplaats, telefoon, geboortedatum) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         int ret = 0;
         
         if(connecting() == -1) {
            return -1;
         }
         dbc.makeQuery(insertQuery);
-        dbc.insertIntoQuery(1, this.spelersnr, this.roepnaam, this.tussenvoegsels, 
+        dbc.insertIntoQuery(1, this.spelerscode, this.spelersnr, this.roepnaam, this.tussenvoegsels, 
                 this.achternaam, this.adres, this.postcode, this.woonplaats, 
                 this.telefoon);
-        dbc.insertIntoQuery(9,this.geboortedatum);
+        dbc.insertIntoQuery(10,this.geboortedatum);
+        
+        System.out.print(dbc);
         
         if(dbc.sendQuery() == -1) {
             ret = -1;
