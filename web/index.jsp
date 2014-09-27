@@ -17,6 +17,7 @@
     lid = new Lid("");
     
     String conmsg;
+    String id = "usr";
     int aantal = 0;
     
     if(con.getConnError() == null)
@@ -31,6 +32,10 @@
         response.sendRedirect(response.encodeURL("toevoegen.jsp"));
         return;
     }
+    
+    if(request.getParameter("id") != null){
+        id = lid.getRoepnaam();
+    }
 %>
 
 <!DOCTYPE html>
@@ -39,9 +44,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="main.css" type="text/css" media= "screen">
         <title>JSP Page</title>
+        
     </head>
     <body>
-        <h3><i><%= conmsg %></i></h3>
+        <h3><i><%= conmsg %> + <%= id %></i></h3>
         
         <form action="index.jsp" method="get">
             Zoeken: <input type = "text" name = "input"><input name = "submit" type="submit">
@@ -93,7 +99,7 @@
                     <td><%= lid.getGeboortedatum() %></td>
                     <td>teamnaam</td>
                     <th><a href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>">Wijzigen</a></th>
-                    <th><a href = "verwijder.jsp?id=<%= lid.getSpelerscode() %>">Verwijder</a></th>
+                    <th><input type="button" name="verwijder" id="<%= lid.getSpelerscode() %>" href="#" value="Verwijder"></th>
                 </tr>
                 <%
                 }
@@ -143,7 +149,7 @@
                         <td><%= lid.getGeboortedatum() %></td>
                         <td>teamnaam</td>
                         <th><a href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>">Wijzigen</a></th>
-                        <th><a href = "verwijder.jsp?id=<%= lid.getSpelerscode() %>">Verwijder</a></th>
+                        <th><a href="index.jsp?id=<%= lid.getSpelerscode() %>"><input type="button" name="verwijder" value="Verwijder"></a></th>
                     </tr>
                 <%
                     }

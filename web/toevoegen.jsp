@@ -31,8 +31,6 @@ if(request.getParameter("submit") != null) {
     lid.setTelefoon(request.getParameter("telefoon"));
     lid.setGeboortedatum(date);
     
-    lid.toevoegen();
-    
     if(lid.toevoegen() == 0) {
         response.sendRedirect(response.encodeURL("index.jsp"));
     }
@@ -42,8 +40,7 @@ if(request.getParameter("submit") != null) {
 }
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/transitional.dtd">
+<!DOCTYPE html>
 
 <html>
     <head>

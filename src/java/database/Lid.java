@@ -6,6 +6,7 @@
 
 package database;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -91,7 +92,7 @@ public class Lid {
         String updateQuery = "UPDATE speler SET spelersnr = ?, " +
                 "roepnaam = ?, tussenvoegsels = ?, achternaam = ?, " +
                 "adres = ?, postcode = ?, woonplaats = ?, telefoon = ?, " +
-                "geboortedatum = ?, WHERE spelerscode = ?";
+                "geboortedatum = ? WHERE spelerscode = ?";
         int ret = 0;
         
         if(connecting() == -1) {
@@ -103,6 +104,10 @@ public class Lid {
                 this.achternaam, this.adres, this.postcode, this.woonplaats, 
                 this.telefoon);
         dbc.insertIntoQuery(9,this.geboortedatum);
+        dbc.insertIntoQuery(10, this.spelerscode);
+        
+        System.out.print(dbc);
+        
         if(dbc.sendQuery() == -1) {
             ret = -1;
         }
@@ -125,7 +130,21 @@ public class Lid {
                 this.telefoon);
         dbc.insertIntoQuery(10,this.geboortedatum);
         
-        System.out.print(dbc);
+        if(dbc.sendQuery() == -1) {
+            ret = -1;
+        }
+        dbc.closeDbConnection();
+        return ret;
+    }
+    public int verwijderen() {        
+        String insertQuery = "DELETE FROM speler WHERE spelerscode = ?";
+        int ret = 0;
+        
+        if(connecting() == -1) {
+           return -1;
+        }
+        dbc.makeQuery(insertQuery);
+        dbc.insertIntoQuery(1, this.spelerscode);
         
         if(dbc.sendQuery() == -1) {
             ret = -1;
