@@ -102,8 +102,8 @@
                     <td><%= lid.getTelefoon() %></td>
                     <td><%= lid.getGeboortedatum() %></td>
                     <td>teamnaam</td>
-                    <th><a href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>">Wijzigen</a></th>
-                    <th><th><a><input type="button" onclick="confirmDelete();" name="verwijder" value="Verwijder"></a></th>
+                    <th><a><input type="button" href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>" value="Wijzigen"></a></th>
+                    <th><a><input type="button" onclick="confirmDelete();" name="verwijder" value="Verwijder"></a></th>
                     
                 </tr>
                 <%
@@ -154,7 +154,6 @@
                         <td><%= lid.getGeboortedatum() %></td>
                         <td>teamnaam</td>
                         <th><a><input type="button" href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>" value="Wijzigen"></a></th>
-                        <th><a href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>">Wijzigen</a></th>
                         <th><a><input type="button" onclick="confirmDelete();" name="verwijder" value="Verwijder"></a></th>
                         
                     </tr>
