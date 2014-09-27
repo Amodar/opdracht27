@@ -34,7 +34,8 @@
     }
     
     if(request.getParameter("id") != null){
-        id = lid.getRoepnaam();
+        lid = new Lid(request.getParameter("id"));
+        lid.verwijderen();
     }
 %>
 
