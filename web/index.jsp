@@ -34,10 +34,13 @@
     }
     
     if(request.getParameter("id") != null){
+        
         lid = new Lid(request.getParameter("id"));
-        lid.verwijderen();
+        lid.verwijderen(); 
     }
 %>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -45,9 +48,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="main.css" type="text/css" media= "screen">
         <title>JSP Page</title>
-        
     </head>
     <body>
+        
         <h3><i><%= conmsg %> + <%= id %></i></h3>
         
         <form action="index.jsp" method="get">
@@ -100,7 +103,8 @@
                     <td><%= lid.getGeboortedatum() %></td>
                     <td>teamnaam</td>
                     <th><a href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>">Wijzigen</a></th>
-                    <th><input type="button" name="verwijder" id="<%= lid.getSpelerscode() %>" href="#" value="Verwijder"></th>
+                    <th><th><a><input type="button" onclick="confirmDelete();" name="verwijder" value="Verwijder"></a></th>
+                    
                 </tr>
                 <%
                 }
@@ -149,13 +153,25 @@
                         <td><%= lid.getTelefoon() %></td>
                         <td><%= lid.getGeboortedatum() %></td>
                         <td>teamnaam</td>
+                        <th><a><input type="button" href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>" value="Wijzigen"></a></th>
                         <th><a href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>">Wijzigen</a></th>
-                        <th><a href="index.jsp?id=<%= lid.getSpelerscode() %>"><input type="button" name="verwijder" value="Verwijder"></a></th>
+                        <th><a><input type="button" onclick="confirmDelete();" name="verwijder" value="Verwijder"></a></th>
+                        
                     </tr>
                 <%
                     }
                 %>
             </table>
         </form>
+            
+        <script>
+            function confirmDelete() {
+                if (confirm('Wilt u zeker <%= lid.getNaam() %> verwijderen?')) {
+                    parent.location.href = 'index.jsp?id=<%= lid.getSpelerscode() %>';
+                }else{
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>
