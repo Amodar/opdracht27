@@ -17,7 +17,6 @@
     lid = new Lid("");
     
     String conmsg;
-    String id = "usr";
     int aantal = 0;
     
     if(con.getConnError() == null)
@@ -51,7 +50,7 @@
     </head>
     <body>
         
-        <h3><i><%= conmsg %> + <%= id %></i></h3>
+        <h3><i><%= conmsg %></i></h3>
         
         <form action="index.jsp" method="get">
             Zoeken: <input type = "text" name = "input"><input name = "submit" type="submit">
@@ -102,7 +101,7 @@
                     <td><%= lid.getTelefoon() %></td>
                     <td><%= lid.getGeboortedatum() %></td>
                     <td>teamnaam</td>
-                    <th><a><input type="button" href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>" value="Wijzigen"></a></th>
+                    <th><a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>"><input type="button" value="Wijzigen"></a></th>
                     <th><a><input type="button" onclick="confirmDelete();" name="verwijder" value="Verwijder"></a></th>
                     
                 </tr>
@@ -153,8 +152,8 @@
                         <td><%= lid.getTelefoon() %></td>
                         <td><%= lid.getGeboortedatum() %></td>
                         <td>teamnaam</td>
-                        <th><a><input type="button" href = "wijzigen.jsp?id=<%= lid.getSpelerscode() %>" value="Wijzigen"></a></th>
-                        <th><a><input type="button" onclick="confirmDelete();" name="verwijder" value="Verwijder"></a></th>
+                        <th><a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>"><input type="button" value="Wijzigen"></a></th>
+                        <th><input type="button" onclick="confirmDelete();" name="verwijder" value="Verwijder"></th>
                         
                     </tr>
                 <%
