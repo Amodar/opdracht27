@@ -6,7 +6,6 @@
 
 package database;
 
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -137,13 +136,13 @@ public class Lid {
         return ret;
     }
     public int verwijderen() {        
-        String insertQuery = "DELETE FROM speler WHERE spelerscode = ?";
+        String deleteQuery = "DELETE FROM speler WHERE spelerscode = ?";
         int ret = 0;
         
         if(connecting() == -1) {
            return -1;
         }
-        dbc.makeQuery(insertQuery);
+        dbc.makeQuery(deleteQuery);
         dbc.insertIntoQuery(1, this.spelerscode);
         
         if(dbc.sendQuery() == -1) {
