@@ -27,8 +27,8 @@
         lid = new Lid(request.getParameter("spelerscode"));
         lid.setSpelersnr(request.getParameter("spelersnr"));
         lid.setRoepnaam(request.getParameter("roepnaam"));
-        lid.setAchternaam(request.getParameter("achternaam"));
         lid.setTussenvoegsels(request.getParameter("tussenvoegsels"));
+        lid.setAchternaam(request.getParameter("achternaam"));
         lid.setAdres(request.getParameter("adres"));
         lid.setPostcode(request.getParameter("postcode"));
         lid.setWoonplaats(request.getParameter("woonplaats"));
@@ -78,13 +78,13 @@
                 <input type = "text" id = "roepnaam" name = "roepnaam" 
                        value = "<%= lid.getRoepnaam() %>" /><br>
                 
-                <label for = "achternaam">Achternaam</label>
-                <input type = "text" id = "achternaam" name = "achternaam" 
-                       value = "<%= lid.getAchternaam() %>" /><br>
-                
                 <label for = "tussenvoegsels">Tussenvoegsels</label>
                 <input type = "text" id = "tussenvoegsels" name = "tussenvoegsels" 
                        value = "<%= lid.getTussenvoegsels() %>" /><br>
+                
+                <label for = "achternaam">Achternaam</label>
+                <input type = "text" id = "achternaam" name = "achternaam" 
+                       value = "<%= lid.getAchternaam() %>" /><br>
                 
                 <label for = "adres">Adres</label>
                 <input type = "text" id = "adres" name = "adres" 
@@ -103,7 +103,7 @@
                        value = "<%= lid.getTelefoon() %>" /><br>
                 
                 <label for = "geboortedatum">Geboortedatum</label>
-                <input type = "date" id = "geboortedatum" name = "geboortedatum" 
+                <input type = "text" id = "geboortedatum" name = "geboortedatum" 
                        value = "<%= lid.getGeboortedatum() %>" /><br>
                 
                 <input type = "submit" name = "submit" value="Verzenden" />

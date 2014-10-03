@@ -5,3 +5,7 @@ label, input[type='text'] {
 th {
     font-weight: bold;
 }
+
+tr:hover {
+    background-color: pink;
+}
