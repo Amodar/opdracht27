@@ -5,7 +5,15 @@ label, input[type='text'] {
 th {
     font-weight: bold;
 }
+.nohover:hover{
+    background-color: white;
+}
 
 tr:hover {
-    background-color: pink;
+    background-color: lightgray;
+}
+
+hr{
+    margin: auto 0;
+    padding: 0;
 }

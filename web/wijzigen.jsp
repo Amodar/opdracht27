@@ -72,7 +72,7 @@
                 
                 <label for = "spelersnr">Spelersnr</label>
                 <input type = "text" id = "spelersnr" name = "spelersnr" 
-                       value = "<%= lid.getSpelersnr() %>" /><br>
+                       value = "<%= lid.getSpelersnr() %>" autofocus /><br>
                 
                 <label for = "roepnaam">Roepnaam</label>
                 <input type = "text" id = "roepnaam" name = "roepnaam" 
