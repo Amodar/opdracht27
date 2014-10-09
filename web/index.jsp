@@ -60,8 +60,18 @@
         <h3><i><%= conmsg %></i></h3>
         
         <form action="index.jsp" method="get">
-            Zoeken: <input type = "text" name = "input"><input class="btn btn-primary" name = "submit" type="submit">
-
+            
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="input-group">
+                        <input type = "text" name = "input" class="form-control">
+                        <span class="input-group-btn">
+                            <button name = "submit" type="submit" class="btn btn-default" type="button">Zoeken</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
             <%
             if(request.getParameter("input") != null) {
                 ov.getStudentsSearched(request.getParameter("input"));
@@ -105,7 +115,7 @@
                         <td><%= lid.getGeboortedatum() %></td>
                         <td>teamnaam</td>
                         <th><a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>">
-                                    <input type="button" class="btn btn-warning" value="Wijzigen"></a></th>
+                                <input type="button" class="btn btn-warning" value="Wijzigen"></a></th>
                         <th><a href="index.jsp?id=<%= lid.getSpelerscode() %>">
                                 <input type="button" class="btn btn-danger" onclick="return confirm('Wilt u zeker <%= lid.getNaam() %> verwijderen?')" value="Verwijder"></a></th>
                     </tr>
@@ -120,11 +130,11 @@
         </form>
         </div>
         
-        <div class="container">
-        <form action="index.jsp" method="get">
-            <h2>Overzicht</h2>
-            <input class="btn btn-primary" type="submit" value="Speler toevoegen" name="toevoegen">
-            <input class="btn btn-primary" type="submit" value="Team toevoegen" name="toevoegen">
+        <div class="container" style="padding-bottom: 10px;">
+            <form action="index.jsp" method="get">
+                <h2>Overzicht</h2>
+                <input class="btn btn-default" type="submit" value="Speler toevoegen" name="toevoegen">
+                <input class="btn btn-default" type="submit" value="Team toevoegen" name="toevoegen">
         </div>
         
         <div class="container">

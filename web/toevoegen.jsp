@@ -50,7 +50,6 @@ if(request.getParameter("submit") != null) {
         <title>Gegevens lid toevoegen</title>
     </head>
     <body>
-      <div id = "wrapper">
         <h2>Gegevens lid toevoegen</h2>
        <%   if(fout == 1) {
                 out.print("<p class = \"error\"> Er is een fout opgetreden bij het toevoegen van gegevens van een lid..!</p>");
@@ -88,6 +87,5 @@ if(request.getParameter("submit") != null) {
                 <input type = "submit" name = "terug" value = "Terug" />
             </fieldset>
         </form>
-      </div>
     </body>
 </html>

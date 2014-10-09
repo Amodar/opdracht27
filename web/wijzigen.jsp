@@ -47,13 +47,22 @@
 
 <html>
     <head>
-        <link rel = "shortcut icon" href = "images/kitten1.ico">
-        <link rel="stylesheet" href="pagina.css" type="text/css" media= "screen">
-        <title>Gegevens lid toevoegen</title>
+        <link rel="stylesheet" href="main.css" type="text/css" media= "screen">
+        <script href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
+        <title>Gegevens lid wijzigen</title>
+        
+        <style>
+            label{
+                width: 110px;
+            }
+        </style>
+        
     </head>
     <body>
-      <div id = "wrapper">
-        <h2>Gegevens lid toevoegen</h2>
+      <div class="container center">
+          <div class="col-xs-4">
+        <h2>Gegevens lid wijzigen</h2>
        <%   if(fout == 1) {
                 out.print("<p class = \"error\"> Er is een fout opgetreden bij het toevoegen van gegevens van een lid..!</p>");
                 out.println("       </div>");
@@ -106,10 +115,11 @@
                 <input type = "text" id = "geboortedatum" name = "geboortedatum" 
                        value = "<%= lid.getGeboortedatum() %>" /><br>
                 
-                <input type = "submit" name = "submit" value="Verzenden" />
-                <input type = "submit" name = "terug" value = "Terug" />
+                <input class="btn btn-danger pull-right" type = "submit" name = "terug" value = "Terug" />
+                <input class="btn btn-success pull-right" type = "submit" name = "submit" value="Verzenden" />
             </fieldset>
         </form>
+          </div>
       </div>
     </body>
 </html>

@@ -1,7 +1,3 @@
-label, input[type='text'] {
-    display:block;
-}
-
 th {
     font-weight: bold;
 }
@@ -13,7 +9,8 @@ tr:hover {
     background-color: lightgray;
 }
 
-hr{
-    margin: auto 0;
-    padding: 0;
+.test {
+    width: 100px;
+    height: 100px;
+    background-color: pink;
 }
