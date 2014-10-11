@@ -60,7 +60,7 @@
         
     </head>
     <body>
-      <div class="container center">
+      <div class="container">
           <div class="col-xs-4">
         <h2>Gegevens lid wijzigen</h2>
        <%   if(fout == 1) {

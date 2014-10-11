@@ -31,6 +31,10 @@
         response.sendRedirect(response.encodeURL("toevoegen.jsp"));
         return;
     }
+    if(request.getParameter("teamtoevoegen") != null) {
+        response.sendRedirect(response.encodeURL("teamToevoegen.jsp"));
+        return;
+    }
     
     if(request.getParameter("id") != null) {
         lid = new Lid(request.getParameter("id"));
@@ -49,19 +53,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="main.css" type="text/css" media= "screen">
+        <link rel="stylesheet" href="main.css" type="text/css">
         <script href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
         <title>JSP Page</title>
     </head>
     <body>
         
-        <div class="container">
+        <div class="container nobottompadding">
         <h3><i><%= conmsg %></i></h3>
         
         <form action="index.jsp" method="get">
             
-            <div class="row">
+            <div class="row nobottompadding">
                 <div class="col-xs-3">
                     <div class="input-group">
                         <input type = "text" name = "input" class="form-control">
@@ -130,11 +134,11 @@
         </form>
         </div>
         
-        <div class="container" style="padding-bottom: 10px;">
+        <div class="container center" style="padding-bottom: 10px;">
             <form action="index.jsp" method="get">
                 <h2>Overzicht</h2>
                 <input class="btn btn-default" type="submit" value="Speler toevoegen" name="toevoegen">
-                <input class="btn btn-default" type="submit" value="Team toevoegen" name="toevoegen">
+                <input class="btn btn-default" type="submit" value="Team toevoegen" name="teamtoevoegen">
         </div>
         
         <div class="container">
