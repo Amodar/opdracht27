@@ -63,7 +63,7 @@
     </head>
     <body>
         
-        <div class="container">
+        <div class="container-fluid">
             <h3><i><%= conmsg %></i></h3>
 
             <form action="index.jsp" method="get">
@@ -144,14 +144,14 @@
         </div>
         
         <form action="index.jsp" method="get">
-            <div class="container center" style="padding-bottom: 10px;">
+            <div class="container-fluid" style="padding-bottom: 10px;">
                     <h2>Overzicht</h2>
                     <input class="btn btn-default" type="submit" value="Speler toevoegen" name="toevoegen">
                     <input class="btn btn-default" type="submit" value="Team toevoegen" name="teamtoevoegen">
                     <input class="btn btn-default pull-right" type="submit" value="Naar team overzicht" name="teamoverzicht">
             </div>
         
-            <div class="container">
+            <div class="container-fluid">
                 <table class="table">
                     <tr class="nohover">
                         <th>Spelerscode</th>
