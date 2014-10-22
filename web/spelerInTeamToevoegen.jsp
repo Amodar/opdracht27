@@ -20,7 +20,9 @@
             <fieldset style="background-color: lightgray; border: 10px; padding: 20px;">
                 <p class="text-center">Voeg
                     <select>
-                        <!-- query: SELECT speler.*, team.* FROM speler, team WHERE team.teamomschrijving = "1" -->
+                        <!-- query: SELECT speler.*, team.teamomschrijving FROM speler, team WHERE team.teamcode = "1" 
+                        SELECT speler.*, team.teamomschrijving FROM speler, team WHERE speler.teamcode = team.teamcode -->
+                        
                         <option value="speler" disabled>speler</option>
                         <option>speler</option>
                     </select>

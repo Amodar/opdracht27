@@ -27,8 +27,7 @@ public class Lid {
     }
     
     public Lid(String spelerscode) {
-        String selectQuery = "SELECT spelerscode, spelersnr, roepnaam, tussenvoegsels, achternaam, adres, postcode, woonplaats, telefoon, geboortedatum "
-                           + "FROM speler "
+        String selectQuery = "SELECT * FROM speler "
                            + "WHERE spelerscode = ?";
         
         ResultSet rs;

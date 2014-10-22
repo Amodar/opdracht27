@@ -34,10 +34,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel = "shortcut icon" href = "images/kitten1.ico">
+        <script href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="main.css" type="text/css" media= "screen">
-        <title>JSP Page</title>
+        <title>Gegevens team toevoegen</title>
     </head>
     <body>
+        <div class="container">
         <%   
             if(fout == 1) {
                 out.print("<p class = \"error\"> Er is een fout opgetreden bij het toevoegen van gegevens van een team..!</p>");
@@ -48,14 +52,16 @@
             }
         %>
         <h1>Team toevoegen</h1>
+        
         <form action="teamToevoegen.jsp" method="get">
             <label for="teamcode">teamcode</label>
             <input type="text" name="teamcode" id="teamcode">
             <label for="teamomschrijving">team omschrijving</label>
             <input type="text" name="teamomschrijving" id="teamomschrijving">
-            
-            <input type = "submit" name = "terug" value = "Terug" />
-            <input type = "submit" name = "submit" value="Verzenden" />
+            <br />
+            <input class="btn btn-danger" type = "submit" name = "terug" value = "Terug" />
+            <input class="btn btn-success" type = "submit" name = "submit" value="Verzenden" />
         </form>
+        </div>
     </body>
 </html>

@@ -50,7 +50,7 @@
         <link rel="stylesheet" href="main.css" type="text/css" media= "screen">
         <script href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
-        <title>Gegevens lid wijzigen</title>
+        <title>Lid wijzigen</title>
         
         <style>
             label{
@@ -62,7 +62,7 @@
     <body>
       <div class="container">
           <div class="col-xs-4">
-        <h2>Gegevens lid wijzigen</h2>
+        <h2>Lid wijzigen</h2>
        <%   if(fout == 1) {
                 out.print("<p class = \"error\"> Er is een fout opgetreden bij het toevoegen van gegevens van een lid..!</p>");
                 out.println("       </div>");
@@ -75,8 +75,6 @@
             <input type = "hidden" id = "spelerscode" name = "spelerscode" 
                    value="<%= lid.getSpelerscode() %>" /> 
             
-            <fieldset>
-                <legend>Gegevens lid</legend>
                 <label for = "spelerscode">Spelerscode: <%= lid.getSpelerscode() %></label><br>
                 
                 <label for = "spelersnr">Spelersnr</label>
@@ -117,7 +115,6 @@
                 
                 <input class="btn btn-danger pull-right" type = "submit" name = "terug" value = "Terug" />
                 <input class="btn btn-success pull-right" type = "submit" name = "submit" value="Verzenden" />
-            </fieldset>
         </form>
           </div>
       </div>
