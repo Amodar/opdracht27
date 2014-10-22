@@ -77,11 +77,13 @@ public class Overzicht {
     public int getStudentsSearched(String zoekArg) {
         Connection con;
         TConnection dbc;
-        String selectQuery = "SELECT * FROM speler WHERE spelerscode LIKE ? OR "
+        String selectQuery = "SELECT speler.*, team.teamomschrijving FROM speler, team "
+                + "WHERE speler.teamcode = team.teamcode "
+                + "AND (team.teamomschrijving LIKE ? OR spelerscode LIKE ? OR "
                 + "spelersnr LIKE ? OR roepnaam LIKE ? OR tussenvoegsels LIKE ? OR "
                 + "achternaam LIKE ? OR adres LIKE ? OR postcode LIKE ? OR "
-                + "woonplaats LIKE ? OR telefoon LIKE ? OR geboortedatum LIKE ?;";
-                
+                + "woonplaats LIKE ? OR telefoon LIKE ? OR geboortedatum LIKE ?)";
+        
         con = new Connection();
         if(con.getConnError() != null) {
             return -1;
@@ -91,7 +93,7 @@ public class Overzicht {
         dbc = con.getConnection();
         dbc.makeQuery(selectQuery);
         
-        dbc.insertIntoQuery(1, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, 
+        dbc.insertIntoQuery(1, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, 
                 zoekArg, zoekArg, zoekArg, zoekArg);
         
         if(dbc.sendQuery() == -1) {

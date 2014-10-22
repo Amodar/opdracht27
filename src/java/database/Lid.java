@@ -20,15 +20,15 @@ public class Lid {
     
     TConnection dbc;
     String spelerscode, spelersnr, roepnaam, tussenvoegsels, achternaam;
-    String adres, postcode, woonplaats, telefoon;
+    String adres, postcode, woonplaats, telefoon, teamomschrijving;
     Date geboortedatum;
     
     public Lid() {
     }
     
     public Lid(String spelerscode) {
-        String selectQuery = "SELECT * FROM speler "
-                           + "WHERE spelerscode = ?";
+        String selectQuery = "SELECT speler.*, team.teamomschrijving FROM speler, team WHERE speler.teamcode = team.teamcode "
+                + "AND spelerscode = ?";
         
         ResultSet rs;
         
@@ -62,6 +62,7 @@ public class Lid {
             this.postcode = rs.getString("postcode");
             this.telefoon = rs.getString("telefoon");
             this.geboortedatum = rs.getDate("geboortedatum");
+            this.teamomschrijving = rs.getString("teamomschrijving");
         } 
         catch(SQLException se) {
         }
@@ -181,6 +182,9 @@ public class Lid {
     }
     public String getTelefoon() {
         return telefoon == null? "":telefoon;
+    }
+    public String getTeamomschrijving() {
+        return teamomschrijving == null? "":teamomschrijving;
     }
     public String getGeboortedatum() {
         String datum;

@@ -120,7 +120,7 @@
                             <td><%= lid.getWoonplaats() %></td>
                             <td><%= lid.getTelefoon() %></td>
                             <td><%= lid.getGeboortedatum() %></td>
-                            <td>teamnaam</td>
+                            <td><%= lid.getTeamomschrijving() %></td>
                             <th>
                                 <a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>">
                                     <input type="button" class="btn btn-warning" value="Wijzigen">
@@ -185,7 +185,7 @@
                                 <td><%= lid.getWoonplaats() %></td>
                                 <td><%= lid.getTelefoon() %></td>
                                 <td><%= lid.getGeboortedatum() %></td>
-                                <td>teamnaam</td>
+                                <td><%= lid.getTeamomschrijving() %></td>
                                 <th>
                                     <a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>">
                                         <input type="button" class="btn btn-warning" value="Wijzigen">
