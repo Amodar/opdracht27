@@ -13,7 +13,7 @@
     int fout = 0;
     
     if(request.getParameter("terug") != null) {
-        response.sendRedirect(response.encodeURL("index.jsp"));
+        response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
         return;
     }
     if(request.getParameter("submit") != null) {
@@ -22,7 +22,7 @@
         team.setTeamomschrijving(request.getParameter("teamomschrijving"));
 
         if(team.toevoegen() == 0) {
-            response.sendRedirect(response.encodeURL("index.jsp"));
+            response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
         }
         else {
             fout = 1;

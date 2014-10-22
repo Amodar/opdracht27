@@ -1,5 +1,5 @@
 <%-- 
-    Document   : index
+    Document   : teamOverzicht
     Created on : Sep 6, 2014, 6:22:14 PM
     Author     : ajay
 --%>
@@ -29,12 +29,12 @@
         response.sendRedirect(response.encodeURL("teamToevoegen.jsp"));
         return;
     }
-
+    //remove team
     if (request.getParameter("id") != null) {
         team = new Team(request.getParameter("id"));
         team.verwijderen();
     }
-
+    //reset search when input has empty string
     if (request.getParameter("submit") != null) {
         if (request.getParameter("input") == "") {
             response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
@@ -57,7 +57,7 @@
         <div class="container">
             <h3><i><%= conmsg%></i></h3>
 
-            <form action="index.jsp" method="get">
+            <form action="teamOverzicht.jsp" method="get">
 
                 <div class="row">
                     <div class="col-xs-3">
@@ -87,8 +87,8 @@
                         <th>Team Omschrijving</th>
                     </tr>
                     <%
-                        teamo.getStudentsSorted(1);
-                        for (int i = 0; i < aantal; i++) {
+                        for (int i = 0; i < aantal; i++) 
+                        {
                             team = teamo.getTeam(i);
                     %>
                     <tr>
@@ -102,7 +102,7 @@
                         </th>
                         <!-- button verwijderen -->               
                         <th>
-                            <a href="index.jsp?id=<%= team.getTeamcode()%>">
+                            <a href="teamOverzicht.jsp?id=<%= team.getTeamcode()%>">
                                 <input type="button" class="btn btn-danger" 
                                        onclick="return confirm('Wilt u zeker <%= team.getTeamomschrijving()%> verwijderen?')" 
                                        value="Verwijder">
@@ -120,11 +120,13 @@
             </form>
         </div>
 
-        <form action="index.jsp" method="get">
+        <form action="teamOverzicht.jsp" method="get">
             <div class="container center" style="padding-bottom: 10px;">
                 <h2>Overzicht</h2>
                 <input class="btn btn-default" type="submit" value="Team toevoegen" name="teamtoevoegen">
-                <input class="btn btn-default" type="submit" value="Speler in team toevoegen" name="spelerInTeamToevoegen">
+                <a href="spelerInTeamToevoegen.jsp">
+                    <input class="btn btn-default" type="button" value="Speler in team toevoegen" name="spelerInTeamToevoegen">
+                </a>
             </div>
 
             <div class="container">
@@ -151,7 +153,7 @@
                         </th>
                         <!-- button verwijderen -->               
                         <th>
-                            <a href="index.jsp?id=<%= team.getTeamcode()%>">
+                            <a href="teamOverzicht.jsp?id=<%= team.getTeamcode()%>">
                                 <input type="button" class="btn btn-danger" 
                                        onclick="return confirm('Wilt u zeker <%= team.getTeamomschrijving()%> verwijderen?')" 
                                        value="Verwijder">
