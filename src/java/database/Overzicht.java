@@ -93,7 +93,9 @@ public class Overzicht {
         dbc = con.getConnection();
         dbc.makeQuery(selectQuery);
         
-        dbc.insertIntoQuery(1, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, 
+        String zoekArg2 = "%" + zoekArg + "%";
+        dbc.insertIntoQuery(1, zoekArg2);
+        dbc.insertIntoQuery(2, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, zoekArg, 
                 zoekArg, zoekArg, zoekArg, zoekArg);
         
         if(dbc.sendQuery() == -1) {
