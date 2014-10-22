@@ -11,34 +11,32 @@
     Connection con;
     Team team;
     TeamOverzicht teamo;
-    
+
     con = new Connection();
     team = new Team();
     teamo = new TeamOverzicht();
-    
+
     String conmsg;
     int aantal = 0;
-    
-    if(con.getConnError() == null)
-    {
+
+    if (con.getConnError() == null) {
         conmsg = "Connectie successvol";
-    }else
-    {
+    } else {
         conmsg = "Geen database verbinding";
     }
-    
-    if(request.getParameter("teamtoevoegen") != null) {
+
+    if (request.getParameter("teamtoevoegen") != null) {
         response.sendRedirect(response.encodeURL("teamToevoegen.jsp"));
         return;
     }
-    
-    if(request.getParameter("id") != null) {
+
+    if (request.getParameter("id") != null) {
         team = new Team(request.getParameter("id"));
         team.verwijderen();
     }
-    
-    if(request.getParameter("submit") != null) {
-        if(request.getParameter("input") == "") {
+
+    if (request.getParameter("submit") != null) {
+        if (request.getParameter("input") == "") {
             response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
         }
     }
@@ -55,9 +53,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+
         <div class="container">
-            <h3><i><%= conmsg %></i></h3>
+            <h3><i><%= conmsg%></i></h3>
 
             <form action="index.jsp" method="get">
 
@@ -73,94 +71,93 @@
                 </div>
 
                 <%
-                if(request.getParameter("input") != null) {
-                    teamo.getStudentsSearched(request.getParameter("input"));
-                    aantal = teamo.getAantalLeden();
+                    if (request.getParameter("input") != null) {
+                        teamo.getStudentsSearched(request.getParameter("input"));
+                        aantal = teamo.getAantalLeden();
 
-                    out.print("<h2>Resultaat</h2>");
+                        out.print("<h2>Resultaat</h2>");
 
-                    if(aantal == 0) {
-                        out.print("Geen resultaat");
-                    } else {
+                        if (aantal == 0) {
+                            out.print("Geen resultaat");
+                        } else {
                 %>
-                    <table class="table">
-                        <tr class="nohover">
-                            <th>Teamcode</th>
-                            <th>Team Omschrijving</th>
-                        </tr>
-                        <% 
+                <table class="table">
+                    <tr class="nohover">
+                        <th>Teamcode</th>
+                        <th>Team Omschrijving</th>
+                    </tr>
+                    <%
                         teamo.getStudentsSorted(1);
-                        for(int i = 0; i < aantal; i++)
-                        {
+                        for (int i = 0; i < aantal; i++) {
                             team = teamo.getTeam(i);
-                        %>
-                            <tr>
-                                <td><%= team.getTeamcode() %></td>
-                                <td><%= team.getTeamomschrijving() %></td>
-                                <!-- button wijzigen -->
-                                <th>
-                                    <a href="teamWijzigen.jsp?id=<%= team.getTeamcode() %>">
-                                        <input type="button" class="btn btn-warning" value="Wijzigen">
-                                    </a>
-                                </th>
-                                <!-- button verwijderen -->               
-                                <th>
-                                    <a href="index.jsp?id=<%= team.getTeamcode() %>">
-                                    <input type="button" class="btn btn-danger" 
-                                            onclick="return confirm('Wilt u zeker <%= team.getTeamomschrijving() %> verwijderen?')" 
-                                            value="Verwijder">
-                                    </a>
-                                </th>
-                            </tr>
-                        <%
+                    %>
+                    <tr>
+                        <td><%= team.getTeamcode()%></td>
+                        <td><%= team.getTeamomschrijving()%></td>
+                        <!-- button wijzigen -->
+                        <th>
+                            <a href="teamWijzigen.jsp?id=<%= team.getTeamcode()%>">
+                                <input type="button" class="btn btn-warning" value="Wijzigen">
+                            </a>
+                        </th>
+                        <!-- button verwijderen -->               
+                        <th>
+                            <a href="index.jsp?id=<%= team.getTeamcode()%>">
+                                <input type="button" class="btn btn-danger" 
+                                       onclick="return confirm('Wilt u zeker <%= team.getTeamomschrijving()%> verwijderen?')" 
+                                       value="Verwijder">
+                            </a>
+                        </th>
+                    </tr>
+                    <%
                         }
-                        %>
-                    </table>
+                    %>
+                </table>
                 <%
+                        }
                     }
-                }
                 %>
             </form>
         </div>
-            
+
         <form action="index.jsp" method="get">
             <div class="container center" style="padding-bottom: 10px;">
                 <h2>Overzicht</h2>
                 <input class="btn btn-default" type="submit" value="Team toevoegen" name="teamtoevoegen">
+                <input class="btn btn-default" type="submit" value="Speler in team toevoegen" name="spelerInTeamToevoegen">
             </div>
-        
+
             <div class="container">
                 <table class="table">
-                        <tr class="nohover">
-                            <th>Teamcode</th>
-                            <th>Team Omschrijving</th>
-                        </tr>
+                    <tr class="nohover">
+                        <th>Teamcode</th>
+                        <th>Team Omschrijving</th>
+                    </tr>
                     <%
                         teamo.getStudentsSorted(1);
                         aantal = teamo.getAantalLeden();
 
-                        for(int i = 0; i < aantal; i++)
-                        {
+                        for (int i = 0; i < aantal; i++) {
                             team = teamo.getTeam(i);
                     %>
-                            <tr>
-                                <td><%= team.getTeamcode() %></td>
-                                <td><%= team.getTeamomschrijving() %></td>
-                                <!-- button wijzigen -->
-                                <th>
-                                    <a href="teamWijzigen.jsp?id=<%= team.getTeamcode() %>">
-                                        <input type="button" class="btn btn-warning" value="Wijzigen">
-                                    </a>
-                                </th>
-                                <!-- button verwijderen -->               
-                                <th>
-                                    <a href="index.jsp?id=<%= team.getTeamcode() %>">
-                                    <input type="button" class="btn btn-danger" 
-                                            onclick="return confirm('Wilt u zeker <%= team.getTeamomschrijving() %> verwijderen?')" 
-                                            value="Verwijder">
-                                    </a>
-                                </th>
-                            </tr>
+                    <tr>
+                        <td><%= team.getTeamcode()%></td>
+                        <td><%= team.getTeamomschrijving()%></td>
+                        <!-- button wijzigen -->
+                        <th>
+                            <a href="teamWijzigen.jsp?id=<%= team.getTeamcode()%>">
+                                <input type="button" class="btn btn-warning" value="Wijzigen">
+                            </a>
+                        </th>
+                        <!-- button verwijderen -->               
+                        <th>
+                            <a href="index.jsp?id=<%= team.getTeamcode()%>">
+                                <input type="button" class="btn btn-danger" 
+                                       onclick="return confirm('Wilt u zeker <%= team.getTeamomschrijving()%> verwijderen?')" 
+                                       value="Verwijder">
+                            </a>
+                        </th>
+                    </tr>
                     <%
                         }
                     %>

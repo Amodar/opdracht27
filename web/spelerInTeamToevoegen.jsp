@@ -17,12 +17,11 @@
     </head>
     <body>
         <div style="padding-top: 10px;">
-            <fieldset style="background-color: lightgray; border: 10px;">
+            <fieldset style="background-color: lightgray; border: 10px; padding: 20px;">
                 <p class="text-center">Voeg
                     <select>
+                        <!-- query: SELECT speler.*, team.* FROM speler, team WHERE team.teamomschrijving = "1" -->
                         <option value="speler" disabled>speler</option>
-                        <option>speler</option>
-                        <option>speler</option>
                         <option>speler</option>
                     </select>
                     toe, aan
