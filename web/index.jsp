@@ -102,7 +102,6 @@
                             <th>Woonplaats</th>
                             <th>Telefoon</th>
                             <th>Geboortedatum</th>
-                            <th>Team</th>
                         </tr>
                         <% 
                         for(int i = 0; i < aantal; i++)
@@ -120,7 +119,6 @@
                             <td><%= lid.getWoonplaats() %></td>
                             <td><%= lid.getTelefoon() %></td>
                             <td><%= lid.getGeboortedatum() %></td>
-                            <td><%= lid.getTeamomschrijving() %></td>
                             <th>
                                 <a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>">
                                     <input type="button" class="btn btn-warning" value="Wijzigen">
@@ -147,7 +145,6 @@
             <div class="container-fluid" style="padding-bottom: 10px;">
                     <h2>Overzicht</h2>
                     <input class="btn btn-default" type="submit" value="Speler toevoegen" name="toevoegen">
-                    <input class="btn btn-default" type="submit" value="Team toevoegen" name="teamtoevoegen">
                     <input class="btn btn-default pull-right" type="submit" value="Naar team overzicht" name="teamoverzicht">
             </div>
         
@@ -164,7 +161,6 @@
                         <th>Woonplaats</th>
                         <th>Telefoon</th>
                         <th>Geboortedatum</th>
-                        <th>Team</th>
                     </tr>
                     <%
                         ov.getStudentsSorted(1);
@@ -185,17 +181,17 @@
                                 <td><%= lid.getWoonplaats() %></td>
                                 <td><%= lid.getTelefoon() %></td>
                                 <td><%= lid.getGeboortedatum() %></td>
-                                <td><%= lid.getTeamomschrijving() %></td>
-                                <th>
-                                    <a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>">
-                                        <input type="button" class="btn btn-warning" value="Wijzigen">
-                                    </a>
-                                </th>
                                 <th>
                                     <a href="index.jsp?id=<%= lid.getSpelerscode() %>">
                                         <input type="button" class="btn btn-danger" onclick="return confirm('Wilt u zeker <%= lid.getNaam() %> verwijderen?')" value="Verwijder">
                                     </a>
                                 </th>
+                                <th>
+                                    <a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>">
+                                        <input type="button" class="btn btn-warning" value="Wijzigen">
+                                    </a>
+                                </th>
+                                
                             </tr>
                     <%
                         }

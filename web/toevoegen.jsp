@@ -4,15 +4,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import = "database.Lid"%>
 <%
+    /*
+    query
+    INSERT INTO `speler`(`spelerscode`, `spelersnr`, `roepnaam`, `tussenvoegsels`, `achternaam`, `adres`, `postcode`, `woonplaats`, `telefoon`, `geboortedatum`) VALUES ("2","2","2","2","2", "2", "2","2","2","10-10-1990");
+    INSERT INTO `teamspeler`(`teamcode`, `spelerscode`) VALUES ("0","1");
+    */
     Lid lid;
 
     int fout = 0;
     Date date;
 
-    if (request.getParameter("terug") != null) {
-        response.sendRedirect(response.encodeURL("index.jsp"));
-        return;
-    }
     if (request.getParameter("submit") != null) {
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -68,10 +69,10 @@
                 <input type = "text" id = "spelersnr" name = "spelersnr"  />
                 <label for = "roepnaam">Roepnaam</label>
                 <input type = "text" id = "roepnaam" name = "roepnaam" />
-                <label for = "achternaam">Achternaam</label>
-                <input type = "text" id = "achternaam" name = "achternaam" />
                 <label for = "tussenvoegsels">Tussenvoegsels</label>
                 <input type = "text" id = "tussenvoegsels" name = "tussenvoegsels" />
+                <label for = "achternaam">Achternaam</label>
+                <input type = "text" id = "achternaam" name = "achternaam" />
                 <label for = "adres">Adres</label>
                 <input type = "text" id = "adres" name = "adres" />
                 <label for = "postcode">Postcode</label>
@@ -83,7 +84,7 @@
                 <label for = "geboortedatum">Geboortedatum</label>
                 <input type = "date" id = "geboortedatum" name = "geboortedatum" />
                 <br />
-                <input class="btn btn-danger" type = "submit" name = "terug" value = "Terug" />
+                <a href="index.jsp"><input class="btn btn-danger" type = "button" name = "terug" value = "Terug" /></a>
                 <input type = "submit" class="btn btn-success" name = "submit" value="Verzenden" />
             </form>
         </div>

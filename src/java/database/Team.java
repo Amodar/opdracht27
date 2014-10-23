@@ -17,7 +17,8 @@ import tconnection.TConnection;
 public class Team {
     TConnection dbc;
     String teamcode, teamomschrijving;
-
+    String spelerscode;
+    
     public Team() {
     }
     
@@ -119,6 +120,23 @@ public class Team {
         dbc.closeDbConnection();
         return ret;
     }
+    public int teamspelertoevoegen() {        
+        String insertQuery = "INSERT INTO teamspeler (spelerscode, teamcode) " +
+                "VALUES (?, ?)";
+        int ret = 0;
+        
+        if(connecting() == -1) {
+           return -1;
+        }
+        dbc.makeQuery(insertQuery);
+        dbc.insertIntoQuery(1, this.spelerscode, this.teamcode);
+        
+        if(dbc.sendQuery() == -1) {
+            ret = -1;
+        }
+        dbc.closeDbConnection();
+        return ret;
+    }
     
     public String getTeamcode() {
         return teamcode == null? "":teamcode;
@@ -132,6 +150,9 @@ public class Team {
     }
     public void setTeamomschrijving(String teamomschrijving) {
         this.teamomschrijving = teamomschrijving;
+    }
+    public void setSpelerscode(String spelerscode) {
+        this.spelerscode = spelerscode;
     }
     
     

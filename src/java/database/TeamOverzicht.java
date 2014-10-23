@@ -38,7 +38,7 @@ public class TeamOverzicht {
      * @return 0 als alles goed is gegaan, -1 als
      * er een exceptie is opgetreden
      */
-    public int getStudentsSorted(int sort) {
+    public int getTeamsSorted(int sort) {
         Connection con;
         TConnection dbc;
         String sorteer;
@@ -74,7 +74,7 @@ public class TeamOverzicht {
      * @return 0 als alles goed is gegaan, -1 als
      * er een exceptie is opgetreden
      */
-    public int getStudentsSearched(String zoekArg) {
+    public int getTeamsSearched(String zoekArg) {
         Connection con;
         TConnection dbc;
         String selectQuery = "SELECT * FROM team WHERE teamcode LIKE ? OR "
@@ -160,7 +160,7 @@ public class TeamOverzicht {
      * @return Het aantal klassen <strong>Student
      * </strong> in de lijst.
      */
-    public int getAantalLeden() {
+    public int getAantalTeams() {
         return lijst.size();
     }
     

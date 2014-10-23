@@ -41,15 +41,8 @@
     <body>
         <div class="container">
             <div class="col-xs-3">
-                <h2>Team wijzigen</h2>
-                <%   if (fout == 1) {
-                        out.print("<p class = \"error\"> Er is een fout opgetreden bij het toevoegen van gegevens van een lid..!</p>");
-                        out.println("       </div>");
-                        out.println("   </body>");
-                        out.println("</html>");
-                        return;
-                    }
-                %>
+                <h2>Teamspeler Overzicht</h2>
+                
                 <form action = "teamWijzigen.jsp" method="post">
                     <input type = "hidden" id = "spelerscode" name = "teamcode" 
                            value="<%= team.getTeamcode() %>" /> 

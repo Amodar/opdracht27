@@ -27,8 +27,7 @@ public class Lid {
     }
     
     public Lid(String spelerscode) {
-        String selectQuery = "SELECT speler.*, team.teamomschrijving FROM speler, team WHERE speler.teamcode = team.teamcode "
-                + "AND spelerscode = ?";
+        String selectQuery = "SELECT * FROM speler WHERE spelerscode = ?";
         
         ResultSet rs;
         
@@ -83,10 +82,7 @@ public class Lid {
         return 0;
     }
     
-    //-------------------------------------------------------------------------
-    //-------------------------------------------------------------------------
-    //-------------------------------------------------------------------------
-    //-------------------------------------------------------------------------
+    
     public int wijzigen() {
         String updateQuery = "UPDATE speler SET spelersnr = ?, " +
                 "roepnaam = ?, tussenvoegsels = ?, achternaam = ?, " +
@@ -114,10 +110,10 @@ public class Lid {
         return ret;
     }
     
-    public int toevoegen() {        
-        String insertQuery = "INSERT INTO speler (spelerscode, spelersnr, roepnaam, tussenvoegsels, " +
-                "achternaam, adres, postcode, woonplaats, telefoon, geboortedatum) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public int toevoegen() {
+        String insertQuery = "INSERT INTO speler(spelerscode, spelersnr, roepnaam, tussenvoegsels, achternaam, adres, postcode, woonplaats, telefoon, geboortedatum) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?);";
+
         int ret = 0;
         
         if(connecting() == -1) {
@@ -125,8 +121,7 @@ public class Lid {
         }
         dbc.makeQuery(insertQuery);
         dbc.insertIntoQuery(1, this.spelerscode, this.spelersnr, this.roepnaam, this.tussenvoegsels, 
-                this.achternaam, this.adres, this.postcode, this.woonplaats, 
-                this.telefoon);
+                this.achternaam, this.adres, this.postcode, this.woonplaats, this.telefoon);
         dbc.insertIntoQuery(10,this.geboortedatum);
         
         if(dbc.sendQuery() == -1) {
@@ -135,7 +130,7 @@ public class Lid {
         dbc.closeDbConnection();
         return ret;
     }
-    public int verwijderen() {        
+    public int verwijderen() {
         String deleteQuery = "DELETE FROM speler WHERE spelerscode = ?";
         int ret = 0;
         
@@ -151,10 +146,7 @@ public class Lid {
         dbc.closeDbConnection();
         return ret;
     }
-    //-------------------------------------------------------------------------
-    //-------------------------------------------------------------------------
-    //-------------------------------------------------------------------------
-    //-------------------------------------------------------------------------
+    
     
     public String getSpelerscode() {
         return spelerscode == null? "":spelerscode;
@@ -182,9 +174,6 @@ public class Lid {
     }
     public String getTelefoon() {
         return telefoon == null? "":telefoon;
-    }
-    public String getTeamomschrijving() {
-        return teamomschrijving == null? "":teamomschrijving;
     }
     public String getGeboortedatum() {
         String datum;

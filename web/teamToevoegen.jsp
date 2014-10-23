@@ -12,10 +12,6 @@
     
     int fout = 0;
     
-    if(request.getParameter("terug") != null) {
-        response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
-        return;
-    }
     if(request.getParameter("submit") != null) {
         team = new Team();
         team.setTeamcode(request.getParameter("teamcode"));
@@ -59,7 +55,7 @@
             <label for="teamomschrijving">team omschrijving</label>
             <input type="text" name="teamomschrijving" id="teamomschrijving">
             <br />
-            <input class="btn btn-danger" type = "submit" name = "terug" value = "Terug" />
+            <a href="teamOverzicht.jsp"><input class="btn btn-danger" type = "button" name = "terug" value = "Terug" /></a>
             <input class="btn btn-success" type = "submit" name = "submit" value="Verzenden" />
         </form>
         </div>

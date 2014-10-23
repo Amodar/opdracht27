@@ -75,7 +75,9 @@
             <input type = "hidden" id = "spelerscode" name = "spelerscode" 
                    value="<%= lid.getSpelerscode() %>" /> 
             
-                <label for = "spelerscode">Spelerscode: <%= lid.getSpelerscode() %></label><br>
+                <label for = "spelerscode">Spelerscode</label>
+                <input type = "text" id = "spelerscode" name = "spelerscode" 
+                       value = "<%= lid.getSpelerscode() %>" disabled /><br>
                 
                 <label for = "spelersnr">Spelersnr</label>
                 <input type = "text" id = "spelersnr" name = "spelersnr" 

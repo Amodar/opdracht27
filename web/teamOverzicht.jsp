@@ -24,11 +24,6 @@
     } else {
         conmsg = "Geen database verbinding";
     }
-
-    if (request.getParameter("teamtoevoegen") != null) {
-        response.sendRedirect(response.encodeURL("teamToevoegen.jsp"));
-        return;
-    }
     //remove team
     if (request.getParameter("id") != null) {
         team = new Team(request.getParameter("id"));
@@ -54,7 +49,7 @@
     </head>
     <body>
 
-        <div class="container">
+        <div class="container-fluid">
             <h3><i><%= conmsg%></i></h3>
 
             <form action="teamOverzicht.jsp" method="get">
@@ -72,8 +67,8 @@
 
                 <%
                     if (request.getParameter("input") != null) {
-                        teamo.getStudentsSearched(request.getParameter("input"));
-                        aantal = teamo.getAantalLeden();
+                        teamo.getTeamsSearched(request.getParameter("input"));
+                        aantal = teamo.getAantalTeams();
 
                         out.print("<h2>Resultaat</h2>");
 
@@ -121,23 +116,28 @@
         </div>
 
         <form action="teamOverzicht.jsp" method="get">
-            <div class="container center" style="padding-bottom: 10px;">
+            <div class="container-fluid center" style="padding-bottom: 10px;">
                 <h2>Overzicht</h2>
-                <input class="btn btn-default" type="submit" value="Team toevoegen" name="teamtoevoegen">
+                <a href="teamToevoegen.jsp">
+                <input class="btn btn-default" type="button" value="Team toevoegen" name="teamtoevoegen">
+                </a>
                 <a href="spelerInTeamToevoegen.jsp">
                     <input class="btn btn-default" type="button" value="Speler in team toevoegen" name="spelerInTeamToevoegen">
                 </a>
+                <a href="index.jsp">
+                <input class="btn btn-default pull-right" type="button" value="Speler overzicht" name="spelerOverzicht">
+                </a>
             </div>
 
-            <div class="container">
+            <div class="container-fluid">
                 <table class="table">
                     <tr class="nohover">
                         <th>Teamcode</th>
                         <th>Team Omschrijving</th>
                     </tr>
                     <%
-                        teamo.getStudentsSorted(1);
-                        aantal = teamo.getAantalLeden();
+                        teamo.getTeamsSorted(1);
+                        aantal = teamo.getAantalTeams();
 
                         for (int i = 0; i < aantal; i++) {
                             team = teamo.getTeam(i);
