@@ -23,7 +23,7 @@ public class Team {
     }
     
     public Team(String teamcode) {
-        String selectQuery = "SELECT teamcode, teamomschrijving FROM team WHERE teamcode = ?";
+        String selectQuery = "SELECT teamcode, teamomschrijving FROM team WHERE teamcode = ?;";
         
         ResultSet rs;
         
@@ -69,7 +69,7 @@ public class Team {
     }
     
     public int wijzigen() {
-        String updateQuery = "UPDATE team SET teamomschrijving = ? WHERE teamcode = ?";
+        String updateQuery = "UPDATE team SET teamomschrijving = ? WHERE teamcode = ?;";
         int ret = 0;
         
         if(connecting() == -1) {
@@ -88,7 +88,7 @@ public class Team {
         return ret;
     }
     public int toevoegen() {        
-        String insertQuery = "INSERT INTO team (teamcode, teamomschrijving) " +
+        String insertQuery = "INSERT INTO team (teamcode, teamomschrijving);" +
                 "VALUES (?, ?)";
         int ret = 0;
         
@@ -105,7 +105,7 @@ public class Team {
         return ret;
     }
     public int verwijderen() {        
-        String deleteQuery = "DELETE FROM team WHERE teamcode = ?";
+        String deleteQuery = "DELETE FROM team WHERE teamcode = ?;";
         int ret = 0;
         
         if(connecting() == -1) {
@@ -120,17 +120,24 @@ public class Team {
         dbc.closeDbConnection();
         return ret;
     }
-    public int teamspelertoevoegen() {        
-        String insertQuery = "INSERT INTO teamspeler (spelerscode, teamcode) " +
-                "VALUES (?, ?)";
+    public int teamspelerToevoegen() {  
+        // insert query teamspeler
+        //INSERT INTO teamspeler (teamcode, spelerscode) VALUES (?, ?);
+        
+        
+        //select speler.* from speler, teamspeler 
+        //where speler.spelerscode = teamspeler.spelerscode and teamspeler.teamcode = "D1" order by achternaam, tussenvoegsels, roepnaam;
+        
+        String insertQuery = "INSERT INTO teamspeler (teamcode, spelerscode) VALUES (?, ?)";
+        
         int ret = 0;
         
         if(connecting() == -1) {
            return -1;
         }
         dbc.makeQuery(insertQuery);
-        dbc.insertIntoQuery(1, this.spelerscode, this.teamcode);
-        
+        dbc.insertIntoQuery(1, this.teamcode, this.spelerscode);
+        System.out.print(insertQuery);
         if(dbc.sendQuery() == -1) {
             ret = -1;
         }
@@ -151,6 +158,7 @@ public class Team {
     public void setTeamomschrijving(String teamomschrijving) {
         this.teamomschrijving = teamomschrijving;
     }
+    //test
     public void setSpelerscode(String spelerscode) {
         this.spelerscode = spelerscode;
     }

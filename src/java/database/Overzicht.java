@@ -49,7 +49,6 @@ public class Overzicht {
         if(sort > 0) {
             selectQuery += " ORDER BY spelerscode " + sorteer;
         }
-        System.out.println(selectQuery);
         con = new Connection();
         if(con.getConnError() != null) {
             return -1;
@@ -85,7 +84,6 @@ public class Overzicht {
         if(con.getConnError() != null) {
             return -1;
         }
-        System.out.println(selectQuery);
         
         dbc = con.getConnection();
         dbc.makeQuery(selectQuery);
@@ -114,23 +112,27 @@ public class Overzicht {
     public int getStudentsPerGroup(String groep) {
         Connection con;
         TConnection dbc;
-        String selectQuery = "select student.ovnummer from student, studentgroep where " +
-                "student.ovnummer = studentgroep.ovnummer and studentgroep.groepscode = ?" +
-                " order by achternaam, tussenvoegsels, roepnaam";
+        String selectQuery = "SELECT speler.spelerscode FROM speler, teamspeler "
+                + "WHERE speler.spelerscode = teamspeler.spelerscode "
+                + "AND teamspeler.teamcode = ?";
         
         con = new Connection();
         if(con.getConnError() != null) {
             return -1;
         }
+        
         dbc = con.getConnection();
         dbc.makeQuery(selectQuery);
         dbc.insertIntoQuery(1, groep);
+        
+        
         if(dbc.sendQuery() == -1) {
             return -1;
         }
         return getData(dbc, selectQuery);
     }
-
+    
+    
     /**
      * Deze methode wordt aangeroepen door de
      * methodes getStudentsSorted(int sort),
@@ -146,13 +148,14 @@ public class Overzicht {
      * er een exceptie is opgetreden
      */
     protected int getData(TConnection dbc, String selectQuery) {
-        
         ResultSet rs;
         Lid lid;
         
-        
         rs = dbc.getResultSet();
+        
+        
         lijst = new ArrayList<Lid>();
+        
         try {
             rs.beforeFirst();
             while(rs.next()) {

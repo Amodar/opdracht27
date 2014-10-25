@@ -17,17 +17,24 @@
 
     Team team;
     TeamOverzicht teamo;
+    int fout = 0;
 
     con = new Connection();
     ov = new Overzicht();
     lid = new Lid();
     team = new Team();
     teamo = new TeamOverzicht();
-    
-    if(request.getParameter("submit") != null) {
-        
-    }
 
+    if (request.getParameter("submit") != null) {
+        team.setSpelerscode(request.getParameter("speler"));
+        team.setTeamcode(request.getParameter("team"));
+
+        if (team.teamspelerToevoegen() == 0) {
+            response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
+        } else {
+            fout = 1;
+        }
+    }
 %>
 
 <!DOCTYPE html>
@@ -40,41 +47,49 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div style="padding-top: 10px;">
-            <fieldset style="background-color: lightgray; border: 10px; padding: 20px;">
-                <p class="text-center">Voeg
-                    <select>
-                        <option value="speler" disabled>speler</option>
-                        <!-- for loop speler-->
-                        <%                
-                            ov.getStudentsSorted(1);
+        <form action="#" method="get">
+            <div style="padding-top: 10px;">
+                <fieldset style="background-color: lightgray; border: 10px; padding: 20px;">
+                    <p class="text-center">Voeg
+                        <select name="speler">
+                            <option value="speler" disabled>speler</option>
+                            <%
+                                ov.getStudentsSorted(1);
 
-                            int aantalLeden = ov.getAantalLeden();
-                            for (int i = 0; i < aantalLeden; i++) {
-                                lid = ov.getLid(i);
-                                out.print("<option>" + lid.getSpelerscode() + " | " + lid.getNaam() + "</option>");
-                            }
-                        %>
-                    </select>
-                    toe, aan
-                    <select>
-                        <!-- for loop team  -->
-                        <option value="choose" disabled>team</option>
-                        <%
-                            teamo.getTeamsSorted(1);
+                                int aantalLeden = ov.getAantalLeden();
+                                for (int i = 0; i < aantalLeden; i++) {
+                                    lid = ov.getLid(i);
+                                    out.print("<option value = \"" + lid.getSpelerscode() + "\">" + lid.getSpelerscode() + " | " + lid.getNaam() + "</option>");
+                                }
+                            %>
+                        </select>
+                        toe, aan
+                        <select name="team">
+                            <option value="team" disabled>team</option>
+                            <%
+                                teamo.getTeamsSorted(1);
 
-                            int aantalTeams = teamo.getAantalTeams();
-                            for (int i = 0; i < aantalTeams; i++) {
-                                team = teamo.getTeam(i);
-                                out.print("<option>" + team.getTeamcode() + " | " + team.getTeamomschrijving() + "</option>");
-                            }
-                        %>
+                                int aantalTeams = teamo.getAantalTeams();
+                                for (int i = 0; i < aantalTeams; i++) {
+                                    team = teamo.getTeam(i);
+                                    out.print("<option value = \"" + team.getTeamcode() + "\" >" + team.getTeamcode() + " | " + team.getTeamomschrijving() + "</option>");
+                                }
+                            %>
 
-                    </select>
-                    <input type="submit" class="btn btn-success" value="bevestig">
-                    <a href="teamOverzicht.jsp"><input type="button" class="btn btn-danger" value="terug"></a>
-                </p>
-            </fieldset>
-        </div>
+                        </select>
+                        <input type="submit" class="btn btn-success" name="submit" value="submit">
+                        <a href="teamOverzicht.jsp">
+                            <input type="button" class="btn btn-danger" value="terug">
+                        </a>
+                        
+                    <%
+                        if (fout == 1) {
+                            out.print("<p>Er is een fout opgetreden!</p>");
+                        }
+                    %>
+                    </p>
+                </fieldset>
+            </div>
+        </form>
     </body>
 </html>

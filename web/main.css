@@ -14,6 +14,12 @@ tr:hover {
     margin: auto 0;
 }
 
+.box {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+}
+
 input[type="text"], input[type="date"] {
     display: block;
 }

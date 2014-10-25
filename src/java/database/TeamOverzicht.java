@@ -98,7 +98,6 @@ public class TeamOverzicht {
         
         return getData(dbc, selectQuery);
     }
-
     /**
      * Deze methode wordt aangeroepen door de
      * methodes getStudentsSorted(int sort),
@@ -117,7 +116,6 @@ public class TeamOverzicht {
         
         ResultSet rs;
         Team team;
-        
         
         rs = dbc.getResultSet();
         lijst = new ArrayList<Team>();

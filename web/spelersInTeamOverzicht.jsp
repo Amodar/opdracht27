@@ -3,24 +3,25 @@
     Created on : Sep 7, 2014, 12:22:51 AM
     Author     : ajay
 --%>
+<%@page import="database.Overzicht"%>
+<%@page import="database.Lid"%>
+<%@page import="database.TeamOverzicht"%>
 <%@page import = "database.Team" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Team team;
+    TeamOverzicht teamo;
+    Lid lid;
+    Overzicht ov;
     int fout = 0;
-    
-    if (request.getParameter("submit") == null) {
-        team = new Team(request.getParameter("id"));
-    } else {
-        team = new Team(request.getParameter("teamcode"));
-        team.setTeamomschrijving(request.getParameter("teamOmschrijving"));
+    int aantal;
 
-        if (team.wijzigen() == 0) {
-            response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
-        } else {
-            fout = 1;
-        }
-    }
+    lid = new Lid();
+    team = new Team();
+    teamo = new TeamOverzicht();
+
+    ov = new Overzicht();
+    
 %>
 <!DOCTYPE html>
 
@@ -31,33 +32,67 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
         <title>Gegevens team wijzigen</title>
 
-        <style>
-            label{
-                width: 110px;
-            }
-        </style>
 
     </head>
     <body>
         <div class="container">
-            <div class="col-xs-3">
-                <h2>Teamspeler Overzicht</h2>
-                
-                <form action = "teamWijzigen.jsp" method="post">
-                    <input type = "hidden" id = "spelerscode" name = "teamcode" 
-                           value="<%= team.getTeamcode() %>" /> 
-                        <label for = "teamcode">Teamcode</label>
-                        <input type = "text" id = "teamcode" name = "teamcode" 
-                               value = "<%= team.getTeamcode() %>" disabled /><br>
+            <h2>Teamspeler Overzicht</h2>
+            <hr>
+            <div class="row">
+                <%                    
+                    teamo.getTeamsSorted(1);
 
-                        <label for = "teamOmschrijving">Team Omschrijving</label>
-                        <input type = "text" id = "teamOmschrijving" name = "teamOmschrijving" 
-                               value = "<%= team.getTeamomschrijving() %>" autofocus /><br>
+                    for (int i = 0; i < teamo.getAantalTeams(); i++) {
+                        team = teamo.getTeam(i);
+                        ov.getStudentsPerGroup(team.getTeamcode());
+                        out.print("<div class=\"col-sm-5 box\">");
+                        out.print("<h3>"+ team.getTeamomschrijving() +"</h3>");
                         
-                        <a href="teamOverzicht.jsp"><input class="btn btn-danger pull-right" type = "button" name = "terug" value = "Terug" /></a>
-                        <input class="btn btn-success pull-right" type = "submit" name = "submit" value="Verzenden" />
-                </form>
+                        
+                        if(ov.getAantalLeden() == 0) {
+                            out.print("<p>geen spelers</p>");
+                        }else{
+                %>
+                <table class="table">
+                    <tr class="nohover">
+                        <th>
+                            Spelerscode
+                        </th>
+                        <th>
+                            Spelersnummer
+                        </th>
+                        <th>
+                            Naam
+                        </th>
+                    </tr>
+                    <%
+                        
+                        for (aantal = 0; aantal < ov.getAantalLeden(); aantal++) {
+                            
+                            lid = ov.getLid(aantal);
+                    %>
+                    <tr>
+                        <td>
+                            <%= lid.getSpelerscode()%>
+                        </td>
+                        <td>
+                            <%= lid.getSpelersnr()%>
+                        </td>
+                        <td>
+                            <%= lid.getNaam()%>
+                        </td>
+                    </tr>
+                    <%
+                        }
+                        }
+                    %>
+                </table>
             </div>
+
+            <%
+                }
+            %>
         </div>
-    </body>
+    </div>
+</body>
 </html>

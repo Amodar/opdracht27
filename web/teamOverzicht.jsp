@@ -82,13 +82,20 @@
                         <th>Team Omschrijving</th>
                     </tr>
                     <%
-                        for (int i = 0; i < aantal; i++) 
-                        {
+                        for (int i = 0; i < aantal; i++) {
                             team = teamo.getTeam(i);
                     %>
                     <tr>
-                        <td><%= team.getTeamcode()%></td>
-                        <td><%= team.getTeamomschrijving()%></td>
+                        <td><a href="spelersInTeam.jsp?teamcode=<%= team.getTeamcode()%>">
+                                <%= team.getTeamcode()%>
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="spelersInTeam.jsp?teamcode=<%= team.getTeamcode()%>">
+                                <%= team.getTeamomschrijving()%>
+                            </a>
+                        </td>
                         <!-- button wijzigen -->
                         <th>
                             <a href="teamWijzigen.jsp?id=<%= team.getTeamcode()%>">
@@ -119,13 +126,13 @@
             <div class="container-fluid center" style="padding-bottom: 10px;">
                 <h2>Overzicht</h2>
                 <a href="teamToevoegen.jsp">
-                <input class="btn btn-default" type="button" value="Team toevoegen" name="teamtoevoegen">
+                    <input class="btn btn-default" type="button" value="Team toevoegen" name="teamtoevoegen">
                 </a>
                 <a href="spelerInTeamToevoegen.jsp">
                     <input class="btn btn-default" type="button" value="Speler in team toevoegen" name="spelerInTeamToevoegen">
                 </a>
                 <a href="index.jsp">
-                <input class="btn btn-default pull-right" type="button" value="Speler overzicht" name="spelerOverzicht">
+                    <input class="btn btn-default pull-right" type="button" value="Speler overzicht" name="spelerOverzicht">
                 </a>
             </div>
 
@@ -143,8 +150,17 @@
                             team = teamo.getTeam(i);
                     %>
                     <tr>
-                        <td><%= team.getTeamcode()%></td>
-                        <td><%= team.getTeamomschrijving()%></td>
+                        <td><a href="spelersInTeam.jsp?teamcode=<%= team.getTeamcode()%>">
+                                <%= team.getTeamcode()%>
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="spelersInTeam.jsp?teamcode=<%= team.getTeamcode()%>">
+                                <%= team.getTeamomschrijving()%>
+                            </a>
+                        </td>
+
                         <!-- button wijzigen -->
                         <th>
                             <a href="teamWijzigen.jsp?id=<%= team.getTeamcode()%>">

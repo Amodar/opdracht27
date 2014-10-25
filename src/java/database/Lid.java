@@ -31,8 +31,6 @@ public class Lid {
         
         ResultSet rs;
         
-        System.out.print(selectQuery);
-
         if(connecting() == -1) {
             return;
         }
@@ -101,7 +99,6 @@ public class Lid {
         dbc.insertIntoQuery(9,this.geboortedatum);
         dbc.insertIntoQuery(10, this.spelerscode);
         
-        System.out.print(dbc);
         
         if(dbc.sendQuery() == -1) {
             ret = -1;
@@ -146,7 +143,6 @@ public class Lid {
         dbc.closeDbConnection();
         return ret;
     }
-    
     
     public String getSpelerscode() {
         return spelerscode == null? "":spelerscode;
