@@ -3,29 +3,47 @@
     Created on : Sep 7, 2014, 12:22:51 AM
     Author     : ajay
 --%>
+<%@page import="database.Teamspeler"%>
 <%@page import="database.Lid"%>
 <%@page import="database.Overzicht"%>
 <%@page import="database.TeamOverzicht"%>
-<%@page import = "database.Team" %>
+<%@page import="database.Team" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Team team;
     TeamOverzicht teamo;
     Lid lid;
     Overzicht ov;
-    int fout = 0;
-    int aantal;
+    Teamspeler ts;
     
     lid = new Lid(); 
     ov = new Overzicht();
     team = new Team();
     teamo = new TeamOverzicht();
+    ts = new Teamspeler();
     
-    if(request.getParameter("teamcode") != null) {
-        team = new Team(request.getParameter("teamcode"));
-        ov.getStudentsPerGroup(request.getParameter("teamcode"));
-    } else {
-        response.sendRedirect("teamOverzicht.jsp");
+    int aantal;
+    String deleteURL = "";
+    String wijzigURL = "";
+    String teamcode = request.getParameter("teamcode");
+    String spelerscode = request.getParameter("spelerscode");
+    
+    if(teamcode != null) {
+        team = new Team(teamcode);
+        ov.getStudentsPerGroup(teamcode);
+    }
+    
+    if(spelerscode != null) {
+        ts = new Teamspeler(spelerscode, teamcode);
+        
+        ts.getSpelerscode();
+        ts.getTeamcode();
+        
+        if (ts.verwijderen() == 0) {
+            response.sendRedirect(response.encodeURL("spelersInTeam.jsp?teamcode=" + team.getTeamcode()));
+        } else {
+            out.print("<p>Er is een fout opgetreden bij het verwijderen.</p>");
+        }
     }
 %>
 <!DOCTYPE html>
@@ -39,17 +57,21 @@
 
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
                 <h2>Team Overzicht</h2>
-                <hr>
+                <a href="spelerInTeamToevoegen.jsp">
+                    <input class="btn btn-default" type="button" value="Speler Toevoegen">
+                </a>
+                <a href="teamOverzicht.jsp">
+                    <input class="btn btn-default pull-right " type="button" value="Team Overzicht">
+                </a>
                 <div class="row">
-                    <div class="col-md-10 box">
+                    <div class="col-md-10">
                         <h3><%= team.getTeamcode() %> | <%= team.getTeamomschrijving() %></h3>
-                        <hr>
                         <%
                             if(ov.getAantalLeden() == 0) {
                                 out.print("<p>Er zijn geen spelers in: " + team.getTeamomschrijving() + "</p>");
-                            }else {
+                            } else {
                         %>
                         <table class="table">
                             <tr class="nohover">
@@ -69,6 +91,11 @@
                             for(aantal = 0; aantal < ov.getAantalLeden(); aantal++) {
                                 
                                 lid = ov.getLid(aantal);
+                                
+                                deleteURL = "spelersInTeam.jsp?teamcode=" + team.getTeamcode() 
+                                        + "&spelerscode=" + lid.getSpelerscode();
+                                wijzigURL = "teamspelerWijzigen.jsp?teamcode=" + team.getTeamcode() 
+                                        + "&spelerscode=" + lid.getSpelerscode();
                             %>
                             <tr>
                                 <td>
@@ -79,6 +106,18 @@
                                 </td>
                                 <td>
                                     <%= lid.getNaam() %>
+                                </td>
+                                <td>
+                                    <a href=<%= wijzigURL %>>
+                                        <input type="button" class="btn btn-warning" value="Wijzigen">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href=<%= deleteURL %>>
+                                    <input type="button" class="btn btn-danger" name="verwijder"
+                                           onclick="return confirm('Wilt u zeker <%= lid.getNaam() %> van <%= team.getTeamomschrijving() %> verwijderen?')" 
+                                           value="Verwijder">
+                                    </a>
                                 </td>
                             </tr>
                            <%

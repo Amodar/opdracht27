@@ -14,6 +14,13 @@ tr:hover {
     margin: auto 0;
 }
 
+.padding-top {
+    padding-top: 10px;
+}
+.padding {
+    margin: 10px;
+}
+
 .box {
     border: 1px solid black;
     border-radius: 5px;

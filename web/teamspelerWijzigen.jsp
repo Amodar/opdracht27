@@ -1,36 +1,43 @@
-<%-- cleaned
+<%-- 
+    Document   : wijzigen
+    Created on : Sep 7, 2014, 12:22:51 AM
+    Author     : ajay
 --%>
-
-<%@page import="database.TeamOverzicht"%>
 <%@page import="database.Team"%>
-<%@page import="database.Overzicht"%>
-<%@page import="database.Lid"%>
+<%@page import="database.TeamOverzicht"%>
+<%@page import="database.Teamspeler"%>
+<%@page import = "database.Lid" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Lid lid;
-    Overzicht ov;
     Team team;
+    Teamspeler ts;
     TeamOverzicht teamo;
-
-    ov = new Overzicht();
+    
     lid = new Lid();
     team = new Team();
+    ts = new Teamspeler();
     teamo = new TeamOverzicht();
     
+    String teamcode = request.getParameter("teamcode");
+    String spelerscode = request.getParameter("spelerscode");
+    
     int fout = 0;
-
-    if (request.getParameter("submit") != null) {
-        team.setSpelerscode(request.getParameter("speler"));
-        team.setTeamcode(request.getParameter("team"));
-
-        if (team.teamspelerToevoegen() == 0) {
+    
+    lid = new Lid(spelerscode);
+    
+    if(request.getParameter("submit") != null) {
+        ts = new Teamspeler(spelerscode, teamcode);
+        ts.setSpelerscode(spelerscode);
+        ts.setTeamcode(teamcode);
+        
+        if (ts.wijzigen() == 0) {
             response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
         } else {
-            fout = 1;
+            out.print("<p>Er is een fout opgetreden bij het wijzigen.</p>");
         }
     }
 %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,22 +56,15 @@
             <form action="#" method="get">
                     <fieldset>
                         <p>Voeg
-                            <select name="speler">
-                                <option value="speler" disabled>speler</option>
-                                <%
-                                    ov.getStudentsSorted(1);
-
-                                    int aantalLeden = ov.getAantalLeden();
-                                    for (int i = 0; i < aantalLeden; i++) {
-                                        lid = ov.getLid(i);
-                                        out.print("<option value = \"" + lid.getSpelerscode() + "\">" 
-                                                + lid.getSpelerscode() + " | " + lid.getNaam() 
-                                                + "</option>");
-                                    }
-                                %>
-                            </select>
-                            toe, aan
-                            <select name="team">
+                             <select name="spelerscode">
+                                <option value="team" disabled>team</option>
+                        <%
+                                out.print("<option value = \"" + lid.getSpelerscode() + "\" >" 
+                                                + lid.getNaam() + "</option>");
+                        %>
+                             </select>
+                             toe, aan
+                            <select name="teamcode">
                                 <option value="team" disabled>team</option>
                                 <%
                                     teamo.getTeamsSorted(1);

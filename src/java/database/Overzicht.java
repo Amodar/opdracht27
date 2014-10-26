@@ -134,14 +134,10 @@ public class Overzicht {
     
     
     /**
-     * Deze methode wordt aangeroepen door de
-     * methodes getStudentsSorted(int sort),
-     * getStudentsSearched(String zoekArg) en 
-     * getStudentsPerGroup(String groep) en stuurt
-     * de query naar de database, haalt de <strong>
+     * stuurt de query naar de database, haalt de <strong>
      * ResultSet</strong> op uit de database en stelt
      * aan de hand daarvan de lijst met de klassen
-     * <strong>Student</strong> samen. 
+     * <strong>Speler</strong> samen. 
      * @param selectQuery De query die naar de database
      * wordt gestuurd.
      * @return 0 als alles goed is gegaan, -1 als

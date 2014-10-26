@@ -27,8 +27,6 @@ public class Team {
         
         ResultSet rs;
         
-        System.out.print(selectQuery);
-
         if(connecting() == -1) {
             return;
         }
@@ -79,8 +77,6 @@ public class Team {
         dbc.makeQuery(updateQuery);
         dbc.insertIntoQuery(1, this.teamomschrijving, this.teamcode);
         
-        System.out.print(dbc);
-        
         if(dbc.sendQuery() == -1) {
             ret = -1;
         }
@@ -121,13 +117,6 @@ public class Team {
         return ret;
     }
     public int teamspelerToevoegen() {  
-        // insert query teamspeler
-        //INSERT INTO teamspeler (teamcode, spelerscode) VALUES (?, ?);
-        
-        
-        //select speler.* from speler, teamspeler 
-        //where speler.spelerscode = teamspeler.spelerscode and teamspeler.teamcode = "D1" order by achternaam, tussenvoegsels, roepnaam;
-        
         String insertQuery = "INSERT INTO teamspeler (teamcode, spelerscode) VALUES (?, ?)";
         
         int ret = 0;
@@ -137,7 +126,7 @@ public class Team {
         }
         dbc.makeQuery(insertQuery);
         dbc.insertIntoQuery(1, this.teamcode, this.spelerscode);
-        System.out.print(insertQuery);
+        
         if(dbc.sendQuery() == -1) {
             ret = -1;
         }
@@ -158,7 +147,6 @@ public class Team {
     public void setTeamomschrijving(String teamomschrijving) {
         this.teamomschrijving = teamomschrijving;
     }
-    //test
     public void setSpelerscode(String spelerscode) {
         this.spelerscode = spelerscode;
     }

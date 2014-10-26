@@ -1,7 +1,4 @@
-<%-- 
-    Document   : teamToevoegen
-    Created on : Sep 28, 2014, 12:00:33 PM
-    Author     : ajay
+<%-- cleaned
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

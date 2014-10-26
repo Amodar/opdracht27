@@ -1,29 +1,19 @@
-<%-- 
-    Document   : teamOverzicht
-    Created on : Sep 6, 2014, 6:22:14 PM
-    Author     : ajay
+<%-- cleaned
 --%>
 
+<%@page import="database.TeamOverzicht"%>
+<%@page import="database.Team"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import = "database.*" %>
 
 <%
-    Connection con;
     Team team;
     TeamOverzicht teamo;
-
-    con = new Connection();
+    
     team = new Team();
     teamo = new TeamOverzicht();
 
-    String conmsg;
     int aantal = 0;
-
-    if (con.getConnError() == null) {
-        conmsg = "Connectie successvol";
-    } else {
-        conmsg = "Geen database verbinding";
-    }
+    
     //remove team
     if (request.getParameter("id") != null) {
         team = new Team(request.getParameter("id"));
@@ -50,11 +40,9 @@
     <body>
 
         <div class="container-fluid">
-            <h3><i><%= conmsg%></i></h3>
-
             <form action="teamOverzicht.jsp" method="get">
 
-                <div class="row">
+                <div class="row padding-top">
                     <div class="col-xs-3">
                         <div class="input-group">
                             <input type = "text" name = "input" class="form-control">
@@ -126,13 +114,18 @@
             <div class="container-fluid center" style="padding-bottom: 10px;">
                 <h2>Overzicht</h2>
                 <a href="teamToevoegen.jsp">
-                    <input class="btn btn-default" type="button" value="Team toevoegen" name="teamtoevoegen">
+                    <input class="btn btn-default" type="button" value="Team toevoegen">
                 </a>
                 <a href="spelerInTeamToevoegen.jsp">
-                    <input class="btn btn-default" type="button" value="Speler in team toevoegen" name="spelerInTeamToevoegen">
+                    <input class="btn btn-default" type="button" value="Speler in team toevoegen">
                 </a>
+                
                 <a href="index.jsp">
-                    <input class="btn btn-default pull-right" type="button" value="Speler overzicht" name="spelerOverzicht">
+                    <input class="btn btn-default pull-right" type="button" value="Speler overzicht">
+                </a>
+                <a href="spelersInTeamOverzicht.jsp">
+                    <input class="btn btn-default pull-right" type="button" value="Spelers in Team Overzicht" 
+                           style="margin-right: 5px;">
                 </a>
             </div>
 
@@ -149,33 +142,33 @@
                         for (int i = 0; i < aantal; i++) {
                             team = teamo.getTeam(i);
                     %>
-                    <tr>
-                        <td><a href="spelersInTeam.jsp?teamcode=<%= team.getTeamcode()%>">
-                                <%= team.getTeamcode()%>
-                            </a>
-                        </td>
+                            <tr>
+                                <td><a href="spelersInTeam.jsp?teamcode=<%= team.getTeamcode()%>">
+                                        <%= team.getTeamcode()%>
+                                    </a>
+                                </td>
 
-                        <td>
-                            <a href="spelersInTeam.jsp?teamcode=<%= team.getTeamcode()%>">
-                                <%= team.getTeamomschrijving()%>
-                            </a>
-                        </td>
+                                <td>
+                                    <a href="spelersInTeam.jsp?teamcode=<%= team.getTeamcode()%>">
+                                        <%= team.getTeamomschrijving()%>
+                                    </a>
+                                </td>
 
-                        <!-- button wijzigen -->
-                        <th>
-                            <a href="teamWijzigen.jsp?id=<%= team.getTeamcode()%>">
-                                <input type="button" class="btn btn-warning" value="Wijzigen">
-                            </a>
-                        </th>
-                        <!-- button verwijderen -->               
-                        <th>
-                            <a href="teamOverzicht.jsp?id=<%= team.getTeamcode()%>">
-                                <input type="button" class="btn btn-danger" 
-                                       onclick="return confirm('Wilt u zeker <%= team.getTeamomschrijving()%> verwijderen?')" 
-                                       value="Verwijder">
-                            </a>
-                        </th>
-                    </tr>
+                                <!-- button wijzigen -->
+                                <th>
+                                    <a href="teamWijzigen.jsp?id=<%= team.getTeamcode()%>">
+                                        <input type="button" class="btn btn-warning" value="Wijzigen">
+                                    </a>
+                                </th>
+                                <!-- button verwijderen -->               
+                                <th>
+                                    <a href="teamOverzicht.jsp?id=<%= team.getTeamcode()%>">
+                                        <input type="button" class="btn btn-danger" 
+                                               onclick="return confirm('Wilt u zeker <%= team.getTeamomschrijving()%> verwijderen?')" 
+                                               value="Verwijder">
+                                    </a>
+                                </th>
+                            </tr>
                     <%
                         }
                     %>

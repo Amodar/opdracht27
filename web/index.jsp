@@ -1,56 +1,31 @@
-<%-- 
-    Document   : index
-    Created on : Sep 6, 2014, 6:22:14 PM
-    Author     : ajay
+<%-- cleaned
 --%>
 
+<%@page import="database.Overzicht"%>
+<%@page import="database.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import = "database.*" %>
 
 <%
-    Connection con;
     Lid lid;
     Overzicht ov;
     
-    con = new Connection();
     ov = new Overzicht();
     lid = new Lid();
     
-    String conmsg;
     int aantal = 0;
     
-    if(con.getConnError() == null)
-    {
-        conmsg = "Connectie successvol";
-    }else
-    {
-        conmsg = "Geen database verbinding";
-    }
-    
-    if(request.getParameter("toevoegen") != null) {
-        response.sendRedirect(response.encodeURL("toevoegen.jsp"));
-        return;
-    }
-    if(request.getParameter("teamtoevoegen") != null) {
-        response.sendRedirect(response.encodeURL("teamToevoegen.jsp"));
-        return;
-    }
-    if(request.getParameter("teamoverzicht") != null) {
-        response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
-        return;
-    }
     if(request.getParameter("id") != null) {
         lid = new Lid(request.getParameter("id"));
         lid.verwijderen();
     }
     
+    //zoekfunctie voor lege string
     if(request.getParameter("submit") != null) {
         if(request.getParameter("input") == "") {
             response.sendRedirect(response.encodeURL("index.jsp"));
         }
     }
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -61,25 +36,24 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
         <title>JSP Page</title>
     </head>
+    
     <body>
-        
-        <div class="container-fluid">
-            <h3><i><%= conmsg %></i></h3>
-
+        <!-- zoek interface -->
+        <div class="container-fluid padding-top">
             <form action="index.jsp" method="get">
-
                 <div class="row">
-                    <div class="col-xs-3">
+                    <div class="col-md-3">
                         <div class="input-group">
                             <input type = "text" name = "input" class="form-control">
                             <span class="input-group-btn">
-                                <button name = "submit" type="submit" class="btn btn-default" type="button">Zoeken</button>
+                                <input type="submit" class="btn btn-default" name = "submit" value="Zoeken">
                             </span>
                         </div>
                     </div>
                 </div>
 
                 <%
+                //zoekfunctie
                 if(request.getParameter("input") != null) {
                     ov.getStudentsSearched(request.getParameter("input"));
                     aantal = ov.getAantalLeden();
@@ -104,8 +78,7 @@
                             <th>Geboortedatum</th>
                         </tr>
                         <% 
-                        for(int i = 0; i < aantal; i++)
-                        {
+                        for(int i = 0; i < aantal; i++) {
                             lid = ov.getLid(i);
                         %>
                         <tr>
@@ -119,16 +92,16 @@
                             <td><%= lid.getWoonplaats() %></td>
                             <td><%= lid.getTelefoon() %></td>
                             <td><%= lid.getGeboortedatum() %></td>
-                            <th>
+                            <td>
                                 <a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>">
                                     <input type="button" class="btn btn-warning" value="Wijzigen">
                                 </a>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <a href="index.jsp?id=<%= lid.getSpelerscode() %>">
                                     <input type="button" class="btn btn-danger" onclick="return confirm('Wilt u zeker <%= lid.getNaam() %> verwijderen?')" value="Verwijder">
                                 </a>
-                            </th>
+                            </td>
                         </tr>
                         <%
                         }
@@ -141,11 +114,16 @@
             </form>
         </div>
         
+        <!-- overzicht -->
         <form action="index.jsp" method="get">
             <div class="container-fluid" style="padding-bottom: 10px;">
                     <h2>Overzicht</h2>
-                    <input class="btn btn-default" type="submit" value="Speler toevoegen" name="toevoegen">
-                    <input class="btn btn-default pull-right" type="submit" value="Naar team overzicht" name="teamoverzicht">
+                    <a href="toevoegen.jsp">
+                    <input class="btn btn-default" type="button" value="Speler toevoegen">
+                    </a>
+                    <a href="teamOverzicht.jsp">
+                    <input class="btn btn-default pull-right" type="button" value="Naar team overzicht">
+                    </a>
             </div>
         
             <div class="container-fluid">
@@ -163,11 +141,11 @@
                         <th>Geboortedatum</th>
                     </tr>
                     <%
+                        //overzicht functie
                         ov.getStudentsSorted(1);
                         aantal = ov.getAantalLeden();
 
-                        for(int i = 0; i < aantal; i++)
-                        {
+                        for(int i = 0; i < aantal; i++) {
                             lid = ov.getLid(i);
                     %>
                             <tr>
@@ -181,16 +159,16 @@
                                 <td><%= lid.getWoonplaats() %></td>
                                 <td><%= lid.getTelefoon() %></td>
                                 <td><%= lid.getGeboortedatum() %></td>
-                                <th>
+                                <td>
                                     <a href="index.jsp?id=<%= lid.getSpelerscode() %>">
                                         <input type="button" class="btn btn-danger" onclick="return confirm('Wilt u zeker <%= lid.getNaam() %> verwijderen?')" value="Verwijder">
                                     </a>
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     <a href="wijzigen.jsp?id=<%= lid.getSpelerscode() %>">
                                         <input type="button" class="btn btn-warning" value="Wijzigen">
                                     </a>
-                                </th>
+                                </td>
                                 
                             </tr>
                     <%
