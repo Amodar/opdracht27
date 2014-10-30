@@ -124,8 +124,7 @@
                     <input class="btn btn-default pull-right" type="button" value="Speler overzicht">
                 </a>
                 <a href="spelersInTeamOverzicht.jsp">
-                    <input class="btn btn-default pull-right" type="button" value="Spelers in Team Overzicht" 
-                           style="margin-right: 5px;">
+                    <input class="btn btn-default pull-right margin-right" type="button" value="Spelers in Team Overzicht">
                 </a>
             </div>
 

@@ -14,6 +14,7 @@
     
     int aantal = 0;
     
+    //verwijder functie
     if(request.getParameter("id") != null) {
         lid = new Lid(request.getParameter("id"));
         lid.verwijderen();
@@ -36,7 +37,6 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
         <title>JSP Page</title>
     </head>
-    
     <body>
         <!-- zoek interface -->
         <div class="container-fluid padding-top">
@@ -125,8 +125,10 @@
                     <input class="btn btn-default pull-right" type="button" value="Naar team overzicht">
                     </a>
             </div>
-        
+            
             <div class="container-fluid">
+                
+                <p>*Klik op een speler's roepnaam om zijn teams te weergeven.</p>
                 <table class="table">
                     <tr class="nohover">
                         <th>Spelerscode</th>
@@ -151,7 +153,7 @@
                             <tr>
                                 <td><%= lid.getSpelerscode() %></td>
                                 <td><%= lid.getSpelersnr() %></td>
-                                <td><%= lid.getRoepnaam() %></td>
+                                <td><a href="teamsInSpeler.jsp?spelerscode=<%= lid.getSpelerscode() %>"><%= lid.getRoepnaam() %></a></td>
                                 <td><%= lid.getTussenvoegsels() %></td>
                                 <td><%= lid.getAchternaam() %></td>
                                 <td><%= lid.getAdres() %></td>
