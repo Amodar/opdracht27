@@ -1,14 +1,19 @@
-<%-- cleaned 
+<%-- cleaned and commented
 --%>
+
 <%@page import = "java.util.Date"%>
 <%@page import = "java.text.SimpleDateFormat"%>
 <%@page import = "database.Lid" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Lid lid;
     Date date;
     int fout = 0;
     
+    //variabelen declareren en initialiseren
     String spelerscode = request.getParameter("spelerscode");
     String spelersnr = request.getParameter("spelersnr");
     String roepnaam = request.getParameter("roepnaam");
@@ -20,10 +25,15 @@
     String telefoon = request.getParameter("telefoon");
     String geboortedatum = request.getParameter("geboortedatum");
 
+//events
+    
+    //functie terug knop
     if (request.getParameter("terug") != null) {
         response.sendRedirect(response.encodeURL("index.jsp"));
         return;
     }
+    
+    //functie wijzigen
     if (request.getParameter("submit") == null) {
         lid = new Lid(request.getParameter("id"));
     } else {

@@ -1,4 +1,4 @@
-<%-- cleaned
+<%-- cleaned and commented
 --%>
 <%@page import = "database.Teamspeler"%>
 <%@page import = "database.Lid"%>
@@ -6,22 +6,29 @@
 <%@page import = "database.Team" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Team team;
     TeamOverzicht teamo;
     Lid lid;
     
+    //constructors oproepen
     lid = new Lid();
     team = new Team();
     teamo = new TeamOverzicht();
     
+    //variabelen declareren en initialiseren
     int aantal;
-    
     String spelerscode = request.getParameter("spelerscode");
     
+//events
+    
+    //constructors lid oproepen
     try {
         teamo.getTeamsFromSpeler(spelerscode);
         lid = new Lid(spelerscode);
-    }catch(NullPointerException npe) {
+    } catch(NullPointerException npe) {
         out.print("Geen speler geselecteerd");
     }
 %>

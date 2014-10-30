@@ -1,4 +1,4 @@
-<%-- cleaned
+<%-- cleaned and commented
 --%>
 <%@page import= "database.Teamspeler"%>
 <%@page import= "database.Overzicht"%>
@@ -7,23 +7,31 @@
 <%@page import = "database.Team" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+//initialiseren, declareren, toewijzingen
+
+    //klassen declareren
     Lid lid;
     Overzicht ov;
     Team team;
     TeamOverzicht teamo;
     Teamspeler ts;
 
+    //constructors oproepen
     lid = new Lid();
     ov = new Overzicht();
     team = new Team();
     teamo = new TeamOverzicht();
 
+    //variabelen declareren en initialiseren
     int aantal;
     String deleteURL = "";
     String wijzigURL = "";
     String teamcode = request.getParameter("teamcode");
     String spelerscode = request.getParameter("spelerscode");
 
+//events
+    
+    //verwijder functie
     if (spelerscode != null) {
         ts = new Teamspeler(spelerscode, teamcode);
 
@@ -37,6 +45,7 @@
         }
     }
     
+    //returned arraylist met alle team objecten
     try {
         teamo.getTeamsSorted(1);
     } catch (NullPointerException npe) {
@@ -70,7 +79,7 @@
             </div>
 <!-- overzicht -->
             <div class="row">
-                <%
+                <%  //nested loop
                     for (int i = 0; i < teamo.getAantalTeams(); i++) {
                         team = teamo.getTeam(i);
                         ov.getStudentsPerGroup(team.getTeamcode());
@@ -89,15 +98,9 @@
                 %>
                 <table class="table">
                     <tr class="nohover">
-                        <th>
-                            Spelerscode
-                        </th>
-                        <th>
-                            Spelersnummer
-                        </th>
-                        <th>
-                            Naam
-                        </th>
+                        <th>Spelerscode</th>
+                        <th>Spelersnummer</th>
+                        <th>Naam</th>
                     </tr>
                     <%
                         for (aantal = 0; aantal < ov.getAantalLeden(); aantal++) {
@@ -110,15 +113,9 @@
                                     + "&spelerscode=" + lid.getSpelerscode();
                     %>
                     <tr>
-                        <td>
-                            <%= lid.getSpelerscode()%>
-                        </td>
-                        <td>
-                            <%= lid.getSpelersnr()%>
-                        </td>
-                        <td>
-                            <%= lid.getNaam()%>
-                        </td>
+                        <td><%= lid.getSpelerscode()%></td>
+                        <td><%= lid.getSpelersnr()%></td>
+                        <td><%= lid.getNaam()%></td>
                         <td>
                             <a href=<%= wijzigURL%>>
                                 <input type="button" class="btn btn-warning" value="Wijzigen">

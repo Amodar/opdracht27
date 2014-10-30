@@ -1,25 +1,33 @@
-<%-- 
-    Document   : wijzigen
-    Created on : Sep 7, 2014, 12:22:51 AM
-    Author     : ajay
+<%-- cleaned and commented
 --%>
+
 <%@page import = "database.Team" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Team team;
+    
+    //constructors oproepen
     team = new Team();
     
+    //variabelen declareren en initialiseren
     int fout = 0;
     String teamcode = request.getParameter("id");
     String wijzigenKnop = request.getParameter("submit");
     String teamOmschrijving = request.getParameter("teamOmschrijving");
+
+//events
     
+    //constructors oproepen
     try {
         team = new Team(teamcode);
     } catch (NullPointerException npe) {
         out.print("Something went wrong");
     }
     
+    //functie wijzigen
     if (wijzigenKnop != null) {
         team = new Team(teamcode);
         team.setTeamomschrijving(teamOmschrijving);

@@ -1,4 +1,4 @@
-<%-- cleaned
+<%-- cleaned and commented
 --%>
 
 <%@page import = "database.Overzicht"%>
@@ -6,16 +6,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Lid lid;
     Overzicht ov;
-
+    
+    //constructors oproepen
     ov = new Overzicht();
     lid = new Lid();
 
+    //variabelen declareren en initialiseren
     int aantal = 0;
     String spelerscode = request.getParameter("id");
     String zoekopdracht = request.getParameter("input");
     String zoekKnop = request.getParameter("submit");
+    
+//events
     
     //zoekfunctie voor lege string
     if (zoekKnop != null) {
@@ -56,6 +63,13 @@
                 </div>
 <!-- zoek overzicht -->
                 <%
+                    /***
+                     * checkt als de zoekopdracht(input) parameter aanwezig is in de adresbal of header
+                     * Methode getStudentesSearched() wordt geroepen
+                     * Arraylist wordt gevuld met gewenste objecten(spelers)
+                     * Aantal objecten wordt berekend met methode getAantalLeden() voor de for loop
+                     * print overzicht op het scherm
+                     */
                     if (zoekopdracht != null) {
                         ov.getStudentsSearched(zoekopdracht);
                         aantal = ov.getAantalLeden();
@@ -116,7 +130,7 @@
             </form>
         </div>
 
-<!-- overzicht interface -->
+<!-- navigatie -->
         <form action="index.jsp" method="get">
             <div class="container-fluid">
                 <h2>Overzicht</h2>
@@ -127,7 +141,7 @@
                     <input class="btn btn-default pull-right" type="button" value="Naar team overzicht">
                 </a>
             </div>
-            <!-- overzicht -->
+<!-- overzicht -->
             <div class="container-fluid">
 
                 <p>*Klik op een speler's roepnaam om zijn teams te weergeven.</p>
@@ -145,11 +159,17 @@
                         <th>Geboortedatum</th>
                     </tr>
                     <%
+                    /**
+                     * roept methode geStudentsSorted() aan
+                     * Arraylist wordt gevuld met gewenste objecten(spelers)
+                     * Aantal objecten wordt berekend met methode getAantalLeden() voor de for loop
+                     * print overzicht op het scherm
+                     */
                         ov.getStudentsSorted(1);
-                        int aantal2 = ov.getAantalLeden();
+                        aantal = ov.getAantalLeden();
                         
                         //overzicht functie
-                        for (int i = 0; i < aantal2; i++) {
+                        for (int i = 0; i < aantal; i++) {
                             lid = ov.getLid(i);
                     %>
                     <tr>

@@ -1,12 +1,19 @@
-<%-- cleaned --%>
+<%-- cleaned and commented
+--%>
+
 <%@page import = "java.util.Date"%>
 <%@page import = "java.text.SimpleDateFormat"%>
 <%@page import = "database.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Lid lid;
 
+    //variabelen declareren en initialiseren
     int fout = 0;
+    
     Date date;
     
     String spelerscode = request.getParameter("spelerscode");
@@ -20,6 +27,9 @@
     String telefoon = request.getParameter("telefoon");
     String geboortedatum = request.getParameter("geboortedatum");
 
+//events
+    
+    //functie toevoegen
     if (request.getParameter("submit") != null) {
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("dd-MM-yyyy");

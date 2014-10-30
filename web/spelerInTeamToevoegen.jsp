@@ -1,4 +1,4 @@
-<%-- cleaned
+<%-- cleaned and commented
 --%>
 
 <%@page import = "database.TeamOverzicht"%>
@@ -7,16 +7,21 @@
 <%@page import = "database.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Lid lid;
     Overzicht ov;
     Team team;
     TeamOverzicht teamo;
 
+    //constructors oproepen
     ov = new Overzicht();
     lid = new Lid();
     team = new Team();
     teamo = new TeamOverzicht();
 
+    //variabelen declareren en initialiseren
     int fout = 0;
     int aantalLeden = 0;
     int aantalTeams = 0;
@@ -24,6 +29,8 @@
     String spelerscode = request.getParameter("speler");
     String teamcode = request.getParameter("team");
 
+//events
+    
     //toevoegen functie
     if (toevoegenKnop != null) {
         team.setSpelerscode(spelerscode);
@@ -35,7 +42,12 @@
             fout = 1;
         }
     }
-
+    
+    /**
+     * roep methodes aan
+     * Arraylisten worden gevuld met gewenste objecten(spelers, teams)
+     * Catch als er geen objecten zijn
+     */
     try {
         ov.getStudentsSorted(1);
         teamo.getTeamsSorted(1);
@@ -57,7 +69,6 @@
     </head>
 
     <body>
-
         <div class="container-fluid">
             <h1>Speler in team toevoegen</h1>
             <hr>
@@ -67,6 +78,7 @@
                         <select name="speler">
                             <option value="speler" disabled>speler</option>
                             <%
+                                //selectbox is gevuld met alle leden
                                 for (int i = 0; i < aantalLeden; i++) {
                                     lid = ov.getLid(i);
                                     out.print("<option value = \"" + lid.getSpelerscode() + "\">"
@@ -79,6 +91,7 @@
                         <select name="team">
                             <option value="team" disabled>team</option>
                             <%
+                                //selectbox is gevuld met alle teams
                                 for (int i = 0; i < aantalTeams; i++) {
                                     team = teamo.getTeam(i);
                                     out.print("<option value = \"" + team.getTeamcode() + "\" >"
@@ -92,7 +105,7 @@
                         <a href="teamOverzicht.jsp">
                             <input type="button" class="btn btn-danger" value="terug">
                         </a>
-                        <%
+                        <%  //insertquery error
                             if (fout == 1) {
                                 out.print("<p>Er is een fout opgetreden bij het toevoegen!</p>");
                             }

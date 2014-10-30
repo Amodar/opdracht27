@@ -1,4 +1,4 @@
-<%-- cleaned
+<%-- cleaned and commented
 --%>
 
 <%@page import = "database.TeamOverzicht"%>
@@ -6,17 +6,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Team team;
     TeamOverzicht teamo;
 
+    //constructors oproepen
     team = new Team();
     teamo = new TeamOverzicht();
-
+    
+    //variabelen declareren en initialiseren
     int aantal = 0;
     String teamcode = request.getParameter("id");
     String zoekOpdracht = request.getParameter("input");
     String zoekKnop = request.getParameter("submit");
 
+//events
+    
     //remove team
     if (teamcode != null) {
         team = new Team(teamcode);
@@ -56,7 +63,7 @@
                     </div>
                 </div>
 <!-- zoek functie -->
-            <%                    
+            <% 
                 if (zoekKnop != null) {
                     teamo.getTeamsSearched(zoekOpdracht);
                     aantal = teamo.getAantalTeams();

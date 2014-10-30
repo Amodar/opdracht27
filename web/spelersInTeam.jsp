@@ -1,4 +1,4 @@
-<%-- cleaned
+<%-- cleaned and commented
 --%>
 <%@page import = "database.Teamspeler"%>
 <%@page import = "database.Lid"%>
@@ -6,22 +6,31 @@
 <%@page import = "database.Team" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Team team;
     Lid lid;
     Overzicht ov;
     Teamspeler ts;
 
+    //constructors oproepen
     lid = new Lid();
     ov = new Overzicht();
     team = new Team();
     ts = new Teamspeler();
 
+    //variabelen declareren en initialiseren
     int aantal;
     String deleteURL = "";
     String wijzigURL = "";
     String teamcode = request.getParameter("teamcode");
     String spelerscode = request.getParameter("spelerscode");
+    
+//events
 
+    //teamcode parameter in team constructor plaatsen en in de studentsPerGroup parameter
+    //returns arraylijsten met objecten
     if (teamcode != null) {
         try {
             team = new Team(teamcode);
@@ -31,7 +40,8 @@
             out.print("Error");
         }
     }
-//verwijder functie
+    
+    //verwijder functie
     if (spelerscode != null && teamcode != null) {
         try {
             ts = new Teamspeler(spelerscode, teamcode);
@@ -58,6 +68,7 @@
         <title>Gegevens team wijzigen</title>
     </head>
     <body>
+<!-- navigatie-->
         <div class="container-fluid">
             <h2>Team Overzicht</h2>
             <a href="spelerInTeamToevoegen.jsp">
@@ -66,6 +77,7 @@
             <a href="teamOverzicht.jsp">
                 <input class="btn btn-default pull-right " type="button" value="Team Overzicht">
             </a>
+<!-- overzicht -->
             <div class="row">
                 <div class="col-md-10">
                     <h3><%= team.getTeamcode()%> | <%= team.getTeamomschrijving()%></h3>

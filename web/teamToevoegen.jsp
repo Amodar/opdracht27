@@ -1,17 +1,24 @@
-<%-- cleaned
+<%-- cleaned and commented
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import = "database.Team;"%>
 
 <%
+//initialiseren, declareren, toewijzingen
+    
+    //klassen declareren
     Team team;
     
+    //variabelen declareren en initialiseren
     int fout = 0;
     String toevoegenKnop = request.getParameter("submit");
     String teamcode = request.getParameter("teamcode");
     String teamOmschrijving = request.getParameter("teamomschrijving");
     
+//events
+    
+    //functie toevoegen
     if(toevoegenKnop != null) {
         team = new Team();
         team.setTeamcode(teamcode);

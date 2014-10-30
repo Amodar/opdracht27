@@ -6,27 +6,38 @@
 <%@page import = "database.Lid" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+//initialiseren, declareren, toewijzingen
+    //klassen declareren
     Lid lid;
     Team team;
     Teamspeler ts;
     TeamOverzicht teamo;
     
+    //constructors oproepen
     lid = new Lid();
     team = new Team();
     ts = new Teamspeler();
     teamo = new TeamOverzicht();
     
+    //variabelen declareren en initialiseren
     int fout = 0;
+    int aantalTeams = 0;
     String wijzigenKnop = request.getParameter("submit");
     String teamcode = request.getParameter("teamcode");
     String spelerscode = request.getParameter("spelerscode");
     
+//events
+    
+    //constructor oproepen en arraylist team genereren
     try {
         lid = new Lid(spelerscode);
+        teamo.getTeamsSorted(1);
+        aantalTeams = teamo.getAantalTeams();
     } catch (NullPointerException npe) {
         out.print("Something went wrong");
     }
     
+    //functie wijzigen
     if(wijzigenKnop != null) {
         ts = new Teamspeler(spelerscode, teamcode);
         ts.setSpelerscode(spelerscode);
@@ -67,9 +78,6 @@
                     <select name="teamcode">
                         <option value="team" disabled>team</option>
                         <%
-                            teamo.getTeamsSorted(1);
-
-                            int aantalTeams = teamo.getAantalTeams();
                             for (int i = 0; i < aantalTeams; i++) {
                                 team = teamo.getTeam(i);
                                 out.print("<option value = \"" + team.getTeamcode() + "\" >" 
