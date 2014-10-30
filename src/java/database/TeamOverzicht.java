@@ -98,6 +98,31 @@ public class TeamOverzicht {
         
         return getData(dbc, selectQuery);
     }
+    
+    public int getTeamsFromSpeler(String spelerscode) {
+        Connection con;
+        TConnection dbc;
+        String selectQuery = "SELECT team.teamcode, team.teamomschrijving "
+                + "FROM team, teamspeler "
+                + "WHERE team.teamcode = teamspeler.teamcode "
+                + "AND teamspeler.spelerscode = ?;";
+        
+        con = new Connection();
+        if(con.getConnError() != null) {
+            return -1;
+        }
+        
+        dbc = con.getConnection();
+        dbc.makeQuery(selectQuery);
+        
+        dbc.insertIntoQuery(1, spelerscode);
+        
+        if(dbc.sendQuery() == -1) {
+            return -1;
+        }
+        
+        return getData(dbc, selectQuery);
+    }
     /**
      * Deze methode wordt aangeroepen door de
      * methodes getStudentsSorted(int sort),

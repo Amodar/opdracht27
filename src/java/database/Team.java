@@ -84,7 +84,7 @@ public class Team {
         return ret;
     }
     public int toevoegen() {        
-        String insertQuery = "INSERT INTO team (teamcode, teamomschrijving);" +
+        String insertQuery = "INSERT INTO team (teamcode, teamomschrijving) " +
                 "VALUES (?, ?)";
         int ret = 0;
         
@@ -93,6 +93,8 @@ public class Team {
         }
         dbc.makeQuery(insertQuery);
         dbc.insertIntoQuery(1, this.teamcode, this.teamomschrijving);
+        
+        System.out.print(dbc);
         
         if(dbc.sendQuery() == -1) {
             ret = -1;
