@@ -1,7 +1,4 @@
-<%-- 
-    Document   : wijzigen
-    Created on : Sep 7, 2014, 12:22:51 AM
-    Author     : ajay
+<%-- cleaned 
 --%>
 <%@page import = "java.util.Date"%>
 <%@page import = "java.text.SimpleDateFormat"%>
