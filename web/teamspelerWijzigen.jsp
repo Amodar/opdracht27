@@ -1,11 +1,8 @@
-<%-- 
-    Document   : wijzigen
-    Created on : Sep 7, 2014, 12:22:51 AM
-    Author     : ajay
+<%-- cleaned
 --%>
-<%@page import="database.Team"%>
-<%@page import="database.TeamOverzicht"%>
-<%@page import="database.Teamspeler"%>
+<%@page import = "database.Team"%>
+<%@page import = "database.TeamOverzicht"%>
+<%@page import = "database.Teamspeler"%>
 <%@page import = "database.Lid" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -19,14 +16,18 @@
     ts = new Teamspeler();
     teamo = new TeamOverzicht();
     
+    int fout = 0;
+    String wijzigenKnop = request.getParameter("submit");
     String teamcode = request.getParameter("teamcode");
     String spelerscode = request.getParameter("spelerscode");
     
-    int fout = 0;
+    try {
+        lid = new Lid(spelerscode);
+    } catch (NullPointerException npe) {
+        out.print("Something went wrong");
+    }
     
-    lid = new Lid(spelerscode);
-    
-    if(request.getParameter("submit") != null) {
+    if(wijzigenKnop != null) {
         ts = new Teamspeler(spelerscode, teamcode);
         ts.setSpelerscode(spelerscode);
         ts.setTeamcode(teamcode);
@@ -49,47 +50,45 @@
     </head>
     
     <body>
-        
         <div class="container-fluid">
             <h1>Speler in team toevoegen</h1>
             <hr>
             <form action="#" method="get">
-                    <fieldset>
-                        <p>Voeg
-                             <select name="spelerscode">
-                                <option value="team" disabled>team</option>
+                <fieldset>
+                    Voeg
+                    <select name="spelerscode">
+                        <option value="team" disabled>team</option>
+                <%
+                        out.print("<option value = \"" + lid.getSpelerscode() + "\" >" 
+                                        + lid.getNaam() + "</option>");
+                %>
+                    </select>
+                    toe, aan
+                    <select name="teamcode">
+                        <option value="team" disabled>team</option>
                         <%
-                                out.print("<option value = \"" + lid.getSpelerscode() + "\" >" 
-                                                + lid.getNaam() + "</option>");
-                        %>
-                             </select>
-                             toe, aan
-                            <select name="teamcode">
-                                <option value="team" disabled>team</option>
-                                <%
-                                    teamo.getTeamsSorted(1);
+                            teamo.getTeamsSorted(1);
 
-                                    int aantalTeams = teamo.getAantalTeams();
-                                    for (int i = 0; i < aantalTeams; i++) {
-                                        team = teamo.getTeam(i);
-                                        out.print("<option value = \"" + team.getTeamcode() + "\" >" 
-                                                + team.getTeamcode() + " | " + team.getTeamomschrijving() 
-                                                + "</option>");
-                                    }
-                                %>
-                            </select>
-
-                            <input type="submit" class="btn btn-success" name="submit" value="submit">
-                            <a href="teamOverzicht.jsp">
-                                <input type="button" class="btn btn-danger" value="terug">
-                            </a>
-                        <%
-                            if (fout == 1) {
-                                out.print("<p>Er is een fout opgetreden!</p>");
+                            int aantalTeams = teamo.getAantalTeams();
+                            for (int i = 0; i < aantalTeams; i++) {
+                                team = teamo.getTeam(i);
+                                out.print("<option value = \"" + team.getTeamcode() + "\" >" 
+                                        + team.getTeamcode() + " | " + team.getTeamomschrijving() 
+                                        + "</option>");
                             }
                         %>
-                        </p>
-                    </fieldset>
+                    </select>
+
+                    <input type="submit" class="btn btn-success" name="submit" value="submit">
+                    <a href="teamOverzicht.jsp">
+                        <input type="button" class="btn btn-danger" value="terug">
+                    </a>
+                <%
+                    if (fout == 1) {
+                        out.print("<p>Er is een fout opgetreden!</p>");
+                    }
+                %>
+                </fieldset>
             </form> 
         </div>
     </body>

@@ -7,13 +7,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Team team;
-    int fout = 0;
+    team = new Team();
     
-    if (request.getParameter("submit") == null) {
-        team = new Team(request.getParameter("id"));
-    } else {
-        team = new Team(request.getParameter("teamcode"));
-        team.setTeamomschrijving(request.getParameter("teamOmschrijving"));
+    int fout = 0;
+    String teamcode = request.getParameter("id");
+    String wijzigenKnop = request.getParameter("submit");
+    String teamOmschrijving = request.getParameter("teamOmschrijving");
+    
+    try {
+        team = new Team(teamcode);
+    } catch (NullPointerException npe) {
+        out.print("Something went wrong");
+    }
+    
+    if (wijzigenKnop != null) {
+        team = new Team(teamcode);
+        team.setTeamomschrijving(teamOmschrijving);
 
         if (team.wijzigen() == 0) {
             response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
@@ -30,13 +39,6 @@
         <script href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
         <title>Gegevens team wijzigen</title>
-
-        <style>
-            label{
-                width: 110px;
-            }
-        </style>
-
     </head>
     <body>
         <div class="container">
@@ -50,8 +52,8 @@
                         return;
                     }
                 %>
-                <form action = "teamWijzigen.jsp" method="post">
-                    <input type = "hidden" id = "spelerscode" name = "teamcode" 
+                <form action = "teamWijzigen.jsp" method="get">
+                    <input type = "hidden" id = "id" name = "id" 
                            value="<%= team.getTeamcode() %>" /> 
                         <label for = "teamcode">Teamcode</label>
                         <input type = "text" id = "teamcode" name = "teamcode" 

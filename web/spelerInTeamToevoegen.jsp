@@ -1,10 +1,10 @@
 <%-- cleaned
 --%>
 
-<%@page import="database.TeamOverzicht"%>
-<%@page import="database.Team"%>
-<%@page import="database.Overzicht"%>
-<%@page import="database.Lid"%>
+<%@page import = "database.TeamOverzicht"%>
+<%@page import = "database.Team"%>
+<%@page import = "database.Overzicht"%>
+<%@page import = "database.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Lid lid;
@@ -16,18 +16,33 @@
     lid = new Lid();
     team = new Team();
     teamo = new TeamOverzicht();
-    
-    int fout = 0;
 
-    if (request.getParameter("submit") != null) {
-        team.setSpelerscode(request.getParameter("speler"));
-        team.setTeamcode(request.getParameter("team"));
+    int fout = 0;
+    int aantalLeden = 0;
+    int aantalTeams = 0;
+    String toevoegenKnop = request.getParameter("submit");
+    String spelerscode = request.getParameter("speler");
+    String teamcode = request.getParameter("team");
+
+    //toevoegen functie
+    if (toevoegenKnop != null) {
+        team.setSpelerscode(spelerscode);
+        team.setTeamcode(teamcode);
 
         if (team.teamspelerToevoegen() == 0) {
             response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
         } else {
             fout = 1;
         }
+    }
+
+    try {
+        ov.getStudentsSorted(1);
+        teamo.getTeamsSorted(1);
+        aantalLeden = ov.getAantalLeden();
+        aantalTeams = teamo.getAantalTeams();
+    } catch (NullPointerException npe) {
+        out.print("error in het ophalen van spelers/teams");
     }
 %>
 
@@ -40,56 +55,50 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
         <title>JSP Page</title>
     </head>
-    
+
     <body>
-        
+
         <div class="container-fluid">
             <h1>Speler in team toevoegen</h1>
             <hr>
             <form action="#" method="get">
-                    <fieldset>
-                        <p>Voeg
-                            <select name="speler">
-                                <option value="speler" disabled>speler</option>
-                                <%
-                                    ov.getStudentsSorted(1);
+                <fieldset>
+                    <p>Voeg
+                        <select name="speler">
+                            <option value="speler" disabled>speler</option>
+                            <%
+                                for (int i = 0; i < aantalLeden; i++) {
+                                    lid = ov.getLid(i);
+                                    out.print("<option value = \"" + lid.getSpelerscode() + "\">"
+                                                + lid.getSpelerscode() + " | " + lid.getNaam()
+                                            + "</option>");
+                                }
+                            %>
+                        </select>
+                        toe, aan
+                        <select name="team">
+                            <option value="team" disabled>team</option>
+                            <%
+                                for (int i = 0; i < aantalTeams; i++) {
+                                    team = teamo.getTeam(i);
+                                    out.print("<option value = \"" + team.getTeamcode() + "\" >"
+                                                + team.getTeamcode() + " | " + team.getTeamomschrijving()
+                                            + "</option>");
+                                }
+                            %>
+                        </select>
 
-                                    int aantalLeden = ov.getAantalLeden();
-                                    for (int i = 0; i < aantalLeden; i++) {
-                                        lid = ov.getLid(i);
-                                        out.print("<option value = \"" + lid.getSpelerscode() + "\">" 
-                                                + lid.getSpelerscode() + " | " + lid.getNaam() 
-                                                + "</option>");
-                                    }
-                                %>
-                            </select>
-                            toe, aan
-                            <select name="team">
-                                <option value="team" disabled>team</option>
-                                <%
-                                    teamo.getTeamsSorted(1);
-
-                                    int aantalTeams = teamo.getAantalTeams();
-                                    for (int i = 0; i < aantalTeams; i++) {
-                                        team = teamo.getTeam(i);
-                                        out.print("<option value = \"" + team.getTeamcode() + "\" >" 
-                                                + team.getTeamcode() + " | " + team.getTeamomschrijving() 
-                                                + "</option>");
-                                    }
-                                %>
-                            </select>
-
-                            <input type="submit" class="btn btn-success" name="submit" value="submit">
-                            <a href="teamOverzicht.jsp">
-                                <input type="button" class="btn btn-danger" value="terug">
-                            </a>
+                        <input type="submit" class="btn btn-success" name="submit" value="submit">
+                        <a href="teamOverzicht.jsp">
+                            <input type="button" class="btn btn-danger" value="terug">
+                        </a>
                         <%
                             if (fout == 1) {
-                                out.print("<p>Er is een fout opgetreden!</p>");
+                                out.print("<p>Er is een fout opgetreden bij het toevoegen!</p>");
                             }
                         %>
-                        </p>
-                    </fieldset>
+                    </p>
+                </fieldset>
             </form> 
         </div>
     </body>

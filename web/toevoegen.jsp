@@ -1,34 +1,40 @@
 
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page import = "java.util.Date"%>
+<%@page import = "java.text.SimpleDateFormat"%>
+<%@page import = "database.Lid"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import = "database.Lid"%>
 <%
-    /*
-    query
-    INSERT INTO `speler`(`spelerscode`, `spelersnr`, `roepnaam`, `tussenvoegsels`, `achternaam`, `adres`, `postcode`, `woonplaats`, `telefoon`, `geboortedatum`) VALUES ("2","2","2","2","2", "2", "2","2","2","10-10-1990");
-    INSERT INTO `teamspeler`(`teamcode`, `spelerscode`) VALUES ("0","1");
-    */
     Lid lid;
 
     int fout = 0;
     Date date;
+    
+    String spelerscode = request.getParameter("spelerscode");
+    String spelersnr = request.getParameter("spelersnr");
+    String roepnaam = request.getParameter("roepnaam");
+    String achternaam = request.getParameter("achternaam");
+    String tussenvoegsels = request.getParameter("tussenvoegsels");
+    String adres = request.getParameter("adres");
+    String postcode = request.getParameter("postcode");
+    String woonplaats = request.getParameter("woonplaats");
+    String telefoon = request.getParameter("telefoon");
+    String geboortedatum = request.getParameter("geboortedatum");
 
     if (request.getParameter("submit") != null) {
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("dd-MM-yyyy");
-        date = sdf.parse(request.getParameter("geboortedatum"));
+        date = sdf.parse(geboortedatum);
 
         lid = new Lid();
-        lid.setSpelerscode(request.getParameter("spelerscode"));
-        lid.setSpelersnr(request.getParameter("spelersnr"));
-        lid.setRoepnaam(request.getParameter("roepnaam"));
-        lid.setAchternaam(request.getParameter("achternaam"));
-        lid.setTussenvoegsels(request.getParameter("tussenvoegsels"));
-        lid.setAdres(request.getParameter("adres"));
-        lid.setPostcode(request.getParameter("postcode"));
-        lid.setWoonplaats(request.getParameter("woonplaats"));
-        lid.setTelefoon(request.getParameter("telefoon"));
+        lid.setSpelerscode(spelerscode);
+        lid.setSpelersnr(spelersnr);
+        lid.setRoepnaam(roepnaam);
+        lid.setAchternaam(achternaam);
+        lid.setTussenvoegsels(tussenvoegsels);
+        lid.setAdres(adres);
+        lid.setPostcode(postcode);
+        lid.setWoonplaats(woonplaats);
+        lid.setTelefoon(telefoon);
         lid.setGeboortedatum(date);
 
         if (lid.toevoegen() == 0) {

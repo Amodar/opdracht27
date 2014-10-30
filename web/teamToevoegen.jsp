@@ -2,17 +2,20 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="database.Team;"%>
+<%@page import = "database.Team;"%>
 
 <%
     Team team;
     
     int fout = 0;
+    String toevoegenKnop = request.getParameter("submit");
+    String teamcode = request.getParameter("teamcode");
+    String teamOmschrijving = request.getParameter("teamomschrijving");
     
-    if(request.getParameter("submit") != null) {
+    if(toevoegenKnop != null) {
         team = new Team();
-        team.setTeamcode(request.getParameter("teamcode"));
-        team.setTeamomschrijving(request.getParameter("teamomschrijving"));
+        team.setTeamcode(teamcode);
+        team.setTeamomschrijving(teamOmschrijving);
 
         if(team.toevoegen() == 0) {
             response.sendRedirect(response.encodeURL("teamOverzicht.jsp"));
