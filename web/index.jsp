@@ -100,7 +100,7 @@
                     <tr>
                         <td><%= lid.getSpelerscode()%></td>
                         <td><%= lid.getSpelersnr()%></td>
-                        <td><%= lid.getRoepnaam()%></td>
+                        <td><a href="teamsInSpeler.jsp?spelerscode=<%= lid.getSpelerscode()%>"><%= lid.getRoepnaam()%></a></td>
                         <td><%= lid.getTussenvoegsels()%></td>
                         <td><%= lid.getAchternaam()%></td>
                         <td><%= lid.getAdres()%></td>
